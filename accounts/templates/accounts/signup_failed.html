@@ -1,0 +1,12 @@
+{% extends "base_wrapper.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Успешная регистрация</title>
+{% endblock %}
+
+{% block content %}
+<p>Некорректная ссылка активации!</p>
+
+<a href="{% url 'signup'%}">Нажмите для регистрации.</a>
+{% endblock %}

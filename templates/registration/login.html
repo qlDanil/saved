@@ -7,39 +7,38 @@
 
 {% block content %}
 
-{% if form.errors %}
-  <p>Your username and password didn't match. Please try again.</p>
-{% endif %}
+    {% if form.errors %}
+        <p class="text-danger">Ваш пароль и логин не подходят. Попробуйте снова.</p>
+    {% endif %}
 
-{% if next %}
-  {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
-    please login with an account that has access.</p>
-  {% else %}
-    <p>Please login to see this page.</p>
-  {% endif %}
-{% endif %}
+    {% if next %}
+        {% if user.is_authenticated %}
+            <p>Ваша учетная запись не имеет доступа к этой странице. Чтобы продолжить, пожалуйста, войдите в систему с
+                учетной записью, которая имеет доступ.</p>
+        {% else %}
+            <p>Для просмотра содержимого страницы вам необходимо авторизироваться.</p>
+        {% endif %}
+    {% endif %}
 
-<form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<table>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <table>
 
-<tr>
-  <td>{{ form.username.label_tag }}</td>
-  <td>{{ form.username }}</td>
-</tr>
+            <tr>
+                <td>Логин</td>
+                <td>{{ form.username }}</td>
+            </tr>
 
-<tr>
-  <td>{{ form.password.label_tag }}</td>
-  <td>{{ form.password }}</td>
-</tr>
-</table>
+            <tr>
+                <td>Пароль</td>
+                <td>{{ form.password }}</td>
+            </tr>
+        </table>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+        <input type="submit" value="Войти"/>
+        <input type="hidden" name="next" value="{{ next }}"/>
+    </form>
 
-{# Assumes you setup the password_reset view in your URLconf #}
-<p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
 
 {% endblock %}
