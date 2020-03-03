@@ -8,14 +8,12 @@
 {% endblock %}
 
 {% block content %}
-    {% if user.is_authenticated %}
-        <li>User: {{ user.get_username }}</li>
-        <li><a href="{% url 'logout' %}?next={{ request.path }}">Выйти из учетной записи</a></li>
-        <h1 class="text-center text-info">Вы попали на основную страницу!</h1>
-    {% else %}
-        <h1 class="text-center text-info">Для просмотра содержимого страницы вам необходимо авторизироваться.</h1>
-        <li><a href="{% url 'login' %}?next={{ request.path }}">Войти в учетную запись</a></li>
-        <li><a href="{% url 'signup' %}?next={{ request.path }}">Зарегистрироваться</a></li>
-    {% endif %}
-
+    <div class="container-fluid" style="min-height: 100vh; padding-top: 20vh; background-color: plum">
+            {% if user.is_authenticated %}
+                <h1 class="text-center text-info">Вы попали на основную страницу!</h1>
+            {% else %}
+                <h1 class="text-center text-info">Для просмотра содержимого страницы вам необходимо
+                    авторизироваться.</h1>
+            {% endif %}
+    </div>
 {% endblock %}

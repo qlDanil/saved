@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{% static 'vendor/bootstrap-4.0.0/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendor/fontawesome-free-5.12.1-web/css/all.min.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_wrapper.css' %}">
 
@@ -16,16 +17,89 @@
     {% endblock %}
 </head>
 <body>
-<div class="container-fluid bg-info" style="height: 200px"></div>
-
+<!-- Navbar-->
+<header class="header">
+    <nav class="navbar navbar-expand-lg fixed-top py-3">
+        <div class="collapse navbar-collapse dual-collapse2 order-1 order-lg-0 w-100">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">About</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Gallery</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Portfolio</a></li>
+                <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">Contact</a></li>
+            </ul>
+        </div>
+        <div class="mx-auto order-0">
+            <a class="navbar-brand mx-auto text-uppercase font-weight-bold" href="#">Сохраненки</a>
+            <button type="button" data-toggle="collapse" data-target=".dual-collapse2"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler navbar-toggler-right"><i class="fa fa-bars"></i></button>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse dual-collapse2 w-100 order-3">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link text-uppercase font-weight-bold">
+                        <i class="fas fa-sign-out-alt"></i> Выйти</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link text-uppercase font-weight-bold">
+                        <i class="fas fa-user-alt"></i> {{ user.get_username }}</a></li>
+                {% else %}
+                    <li class="nav-item"><a href="{% url 'login' %}?next={% url 'index' %}"
+                                            class="nav-link text-uppercase font-weight-bold">
+                        <i class="fas fa-sign-in-alt"></i> Войти</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+</header>
 {% block content %}
 {% endblock %}
 
-<div class="container-fluid bg-info" style="height: 200px"></div>
+<!-- Footer -->
+<footer class="page-footer font-small">
+    <div class="container text-center text-md-left">
+        <hr>
+        <div class="row d-flex align-items-center">
+            <div class="col-md-7 col-lg-8">
+                <p class="text-center text-md-left">&copy saved.ru, 2020 | Все права защищены </p>
+            </div>
+            <div class="col-md-5 col-lg-4 ml-lg-0">
+                <div class="text-center text-md-right">
+                    <ul class="list-inline">
+                        <li class="list-inline-item">
+                            <a class="btn-sm mx-1" href="https://gitlab.com/qlDanil/saved" target="_blank">
+                                <i class="fab fa-gitlab"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-sm mx-1" href="#" target="_blank">
+                                <i class="fab fa-github"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-sm mx-1" href="https://vk.com/qldanil" target="_blank">
+                                <i class="fab fa-vk"></i>
+                            </a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a class="btn-sm mx-1" href="http://instagram.com/qldanil" target="_blank">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
 
 <!-- Vendor JS -->
 <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap-4.0.0/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'vendor/fontawesome-free-5.12.1-web/js/all.min.js' %}"></script>
+<script src="{% static 'js/scripts.js' %}"></script>
 
 </body>
 </html>
