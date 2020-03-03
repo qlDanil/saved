@@ -3,10 +3,14 @@
 
 {% block title %}
     <title>Успешная регистрация</title>
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/line-awesome/css/line-awesome.min.css' %}">
 {% endblock %}
 
 {% block content %}
-<p>Спасибо за подтверждение почты! Теперь вы можете авторизоваться.</p>
-
-<a href="{% url 'login'%}">Нажмите для авторизации.</a>
+    <div class="page-content" style="min-height: 300px">
+        <h5>Спасибо за подтверждение почты! Теперь вы можете авторизоваться. <a href="{% url 'login'%}">Нажмите для авторизации.</a></h5>
+    </div>
 {% endblock %}

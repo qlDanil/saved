@@ -8,21 +8,23 @@
     <link rel="shortcut icon" href="{% static 'icons/favicon.ico' %}">
     <!-- Vendor CSS -->
     <link rel="stylesheet" href="{% static 'vendor/bootstrap-4.0.0/css/bootstrap.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_wrapper.css' %}">
+
 
     {% block title %}
     {% endblock %}
 </head>
 <body>
-<div class="container-fluid bg-info mb-5" style="height: 200px"></div>
+<div class="container-fluid bg-info" style="height: 200px"></div>
 
 {% block content %}
 {% endblock %}
 
-<div class="container-fluid bg-info mt-5" style="height: 200px"></div>
+<div class="container-fluid bg-info" style="height: 200px"></div>
 
 <!-- Vendor JS -->
 <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
-<script src="{% static 'vendor/popper/popper.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap-4.0.0/js/bootstrap.bundle.min.js' %}"></script>
 
 </body>

@@ -3,10 +3,14 @@
 
 {% block title %}
     <title>Успешная регистрация</title>
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/line-awesome/css/line-awesome.min.css' %}">
 {% endblock %}
 
 {% block content %}
-<p>Некорректная ссылка активации!</p>
-
-<a href="{% url 'signup'%}">Нажмите для регистрации.</a>
+    <div class="page-content" style="min-height: 300px">
+        <h5>Некорректная ссылка активации! <a href="{% url 'signup'%}">Нажмите для регистрации.</a></h5>
+    </div>
 {% endblock %}

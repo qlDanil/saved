@@ -16,7 +16,6 @@ def signup(request):
         return render(request, 'accounts/signup.html')
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        print(form.errors.as_data())
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False

@@ -3,42 +3,35 @@
 
 {% block title %}
     <title>Авторизация</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
+    <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/line-awesome/css/line-awesome.min.css' %}">
 {% endblock %}
 
 {% block content %}
-
-    {% if form.errors %}
-        <p class="text-danger">Ваш пароль и логин не подходят. Попробуйте снова.</p>
-    {% endif %}
-
-    {% if next %}
-        {% if user.is_authenticated %}
-            <p>Ваша учетная запись не имеет доступа к этой странице. Чтобы продолжить, пожалуйста, войдите в систему с
-                учетной записью, которая имеет доступ.</p>
-        {% else %}
-            <p>Для просмотра содержимого страницы вам необходимо авторизироваться.</p>
-        {% endif %}
-    {% endif %}
-
-    <form method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        <table>
-
-            <tr>
-                <td>Логин</td>
-                <td>{{ form.username }}</td>
-            </tr>
-
-            <tr>
-                <td>Пароль</td>
-                <td>{{ form.password }}</td>
-            </tr>
-        </table>
-
-        <input type="submit" value="Войти"/>
-        <input type="hidden" name="next" value="{{ next }}"/>
-    </form>
-
-    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
-
+    <div class="page-content">
+        <div class="form-v7-content" style="width: 580px;">
+            <form class="form-detail" action="{% url 'login' %}" method="post">
+                {% csrf_token %}
+                <div class="form-row">
+                    <label for="username">Логин</label>
+                    <div class="input-text">{{ form.username }}</div>
+                </div>
+                <div class="form-row">
+                    <label for="password">Пароль</label>
+                    <div class="input-text">{{ form.password }}</div>
+                </div>
+                <div class="form-row-last">
+                    <input type="submit" name="login" class="register" value="Войти">
+                    <p><a href="{% url 'signup' %}">Не зарегистрированы?</a></p>
+                    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+                    {% if form.errors %}
+                        <p class="text-danger">Ваш пароль и логин не подходят. Попробуйте снова.</p>
+                    {% endif %}
+                </div>
+                <input type="hidden" name="next" value="{{ next }}"/>
+            </form>
+        </div>
+    </div>
 {% endblock %}
