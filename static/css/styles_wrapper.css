@@ -17,8 +17,19 @@ html {
     text-decoration: none;
 }
 
-.navbar .navbar-brand {
-    color: #fff;
+.navbar.active {
+    background: #fff;
+    box-shadow: 1px 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar.active .nav-link {
+    color: #555;
+}
+
+.navbar.active .nav-link:hover,
+.navbar.active .nav-link:focus {
+    color: #555;
+    text-decoration: none;
 }
 
 @media (max-width: 991px) {
@@ -27,11 +38,11 @@ html {
     }
 
     .navbar .navbar-brand, .navbar .nav-link {
-        color: #000;
+        color: #555;
     }
 
     .navbar .nav-link:hover, .navbar .nav-link:focus {
-        color: #555;
+        color: #000;
         text-decoration: none;
     }
 }

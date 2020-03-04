@@ -8,12 +8,12 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid" style="min-height: 100vh; padding-top: 20vh; background-color: plum">
+    <div class="container-fluid main-window">
             {% if user.is_authenticated %}
-                <h1 class="text-center text-info">Вы попали на основную страницу!</h1>
+                <h2 class="text-center text-info">Вы попали на основную страницу!</h2>
             {% else %}
-                <h1 class="text-center text-info">Для просмотра содержимого страницы вам необходимо
-                    авторизироваться.</h1>
+                <h2 class="text-center text-info">Для просмотра содержимого страницы вам необходимо
+                    авторизироваться.</h2>
             {% endif %}
     </div>
 {% endblock %}

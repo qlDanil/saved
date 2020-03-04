@@ -1,9 +1,9 @@
 .page-content {
     width: 100%;
-    min-height:100vh;
-    background-image: -moz-linear-gradient(120deg, #f68084 0%, #a6c0fe 100%);
-    background-image: -webkit-linear-gradient(120deg, #f68084 0%, #a6c0fe 100%);
-    background-image: -ms-linear-gradient(120deg, #f68084 0%, #a6c0fe 100%);
+    min-height: 100vh;
+    background-image: -moz-linear-gradient(90deg, #f68084 0%, #fff 35%, #fff 65%, #a6c0fe 100%);
+    background-image: -webkit-linear-gradient(90deg, #f68084 0%, #fff 35%, #fff 65%, #a6c0fe 100%);
+    background-image: -ms-linear-gradient(90deg, #f68084 0%, #fff 35%, #fff 65%, #a6c0fe 100%);
     display: flex;
     display: -webkit-flex;
     justify-content: center;
@@ -16,6 +16,7 @@
     -ms-align-items: center;
     -moz-align-items: center;
     -webkit-align-items: center;
+    overflow: hidden;
 }
 
 .form-v7-content {
@@ -167,7 +168,6 @@
     padding-left: 10px;
 }
 
-/* Responsive */
 @media screen and (max-width: 1120px) {
     .form-v7-content {
         margin: 180px 20px;
@@ -204,7 +204,6 @@
 }
 
 @media screen and (max-width: 575px) {
-
     .form-v7-content .form-detail {
         padding: 30px 20px;
         width: auto;
@@ -218,5 +217,12 @@
     .form-v7-content .form-detail .form-row-last p {
         margin-left: 0px;
         margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 374px) {
+    .form-v7-content .form-detail {
+        padding: 30px 0 0 12vw;
+        width: auto;
     }
 }
