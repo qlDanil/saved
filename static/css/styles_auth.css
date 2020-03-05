@@ -168,7 +168,7 @@
     padding-left: 10px;
 }
 
-@media screen and (max-width: 1120px) {
+@media screen and (max-width: 1120px), screen and (max-height: 900px){
     .form-v7-content {
         margin: 180px 20px;
         flex-direction: column;

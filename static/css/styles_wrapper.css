@@ -28,7 +28,7 @@ html {
 
 .navbar.active .nav-link:hover,
 .navbar.active .nav-link:focus {
-    color: #555;
+    color: #000;
     text-decoration: none;
 }
 
