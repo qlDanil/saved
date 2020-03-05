@@ -1,5 +1,6 @@
 {% extends "base_wrapper.html" %}
 {% load static %}
+{% load trans from i18n %}
 
 {% block title %}
     <title>Регистрация</title>
@@ -17,7 +18,7 @@
                 <p class="text-1">Регистрация</p>
                 <p class="text-2">Privacy policy & Terms of service</p>
             </div>
-            <form class="form-detail"  action="{% url 'signup' %}" method="post">
+            <form class="form-detail" action="{% url 'signup' %}" method="post">
                 {% csrf_token %}
                 <div class="form-row">
                     <label for="first_name">Имя</label>
@@ -42,6 +43,8 @@
                 <div class="form-row-last">
                     <input type="submit" name="register" class="register" value="Зарегистрироваться">
                     <p>Или<a href="{% url 'login' %}">Авторизоваться</a></p>
+                    <a class="btn btn-primary text-white mt-sm-3" href="/login/vk-oauth2" role="button">Войти с помощью
+                        <i class="fab fa-vk" data-toggle="tooltip"></i></a>
                 </div>
             </form>
             <div aria-live="polite" aria-atomic="true">
@@ -57,8 +60,8 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <div class="toast-body text-white">
-                                    {{ error }}
+                                <div class="toast-body text-white ">
+                                    <small>{{ error }}</small>
                                 </div>
                             </div>
                         {% endfor %}

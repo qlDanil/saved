@@ -122,11 +122,11 @@
 }
 
 .form-v7-content .form-detail .form-row input:focus {
-    border-bottom: 2px solid #2bb33e;
+    border-bottom: 2px solid #682a68;
 }
 
 .form-v7-content .form-detail .register {
-    background: #373be3;
+    background: #682a68;
     border-radius: 4px;
     -o-border-radius: 4px;
     -ms-border-radius: 4px;
@@ -144,7 +144,7 @@
 }
 
 .form-v7-content .form-detail .register:hover {
-    background: #2a2cb0;
+    background: #680268;
 }
 
 .form-v7-content .form-detail .form-row-last {
@@ -164,7 +164,7 @@
 
 .form-v7-content .form-detail .form-row-last a {
     font-size: 16px;
-    color: #373be3;
+    color: #682a68;
     padding-left: 10px;
 }
 
@@ -216,7 +216,7 @@
 
     .form-v7-content .form-detail .form-row-last p {
         margin-left: 0px;
-        margin-bottom: 50px;
+        margin-bottom: 10px;
     }
 }
 
@@ -224,5 +224,9 @@
     .form-v7-content .form-detail {
         padding: 30px 0 0 12vw;
         width: auto;
+    }
+
+    .form-v7-content .alerts {
+        width: 300px;
     }
 }
