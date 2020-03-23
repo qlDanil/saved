@@ -10,7 +10,6 @@
 
 {% block content %}
     <div class="container-fluid main-window">
-        {% if user.is_authenticated %}
             <p ALIGN=LEFT><I>Небольшая галерея <span style="color:#ff3300;">избранных</span> картинок</I></p>
             <hr align="center" size=3px color=#000000>
             <p class="z1"> Здесь вы можете ориентироваться по разделам</p>
@@ -46,8 +45,5 @@
             <IMG SRC="{% static 'images/web2/pct1.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
             <IMG SRC="{% static 'images/web2/pct16.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
             </p>
-        {% else %}
-            <h2 class="text-center text-info">Для просмотра содержимого страницы вам необходимо авторизироваться.</h2>
-        {% endif %}
     </div>
 {% endblock %}
