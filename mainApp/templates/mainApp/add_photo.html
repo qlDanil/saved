@@ -1,0 +1,20 @@
+{% extends "base_wrapper.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Основная страница</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_add_photo.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" style="min-height: 200vh; padding-top: 20vh;">
+        <form action="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+        {{ form }}
+        </table>
+        <input type="submit" value="Submit" />
+    </form>
+    </div>
+{% endblock %}

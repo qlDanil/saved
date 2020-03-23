@@ -73,7 +73,6 @@
 .text-shadow-1 {
     font-family: Century Gothic;
     font-size: 40px;
-    background: fon.jpg;
     color: black;
     text-shadow: -25px -25px 0 #9c533e, -25px -25px 0 #6f9654, -25px -25px 0 #6f9654, 25px 25px 0 #6f9654, 25px 25px 0 white, 25px 25px 0 white, 18px 18px 0 white;
     letter-spacing: 0.1em;
@@ -82,7 +81,6 @@
 .text-shadow-2 {
     font-family: Century Gothic;
     font-size: 20px;
-    background: fon.jpg;
     color: #000000;
     text-shadow: -1px -1px white, 1px 1px gray, 2px 2px #7a7a7a, 3px 3px #757575, 4px 4px #707070, 5px 5px #6b6b6b, 6px 6px #666666, 7px 7px #616161, 8px 8px #5c5c5c, 9px 9px #575757, 10px 10px #525252, 11px 11px #4d4d4d, 18px 18px 30px rgba(0, 0, 0, .4), 18px 18px 10px rgba(0, 0, 0, .4);
 }
@@ -90,7 +88,6 @@
 .text-shadow-3 {
     font-family: Century Gothic;
     font-size: 30px;
-    background: fon.jpg;
     color: black;
     text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px #f05d22, 0 0 35px #f05d22, 0 0 40px #f05d22, 0 0 50px #f05d22, 0 0 75px #f05d22;
 }
@@ -98,7 +95,6 @@
 .text-shadow-4 {
     font-family: Century Gothic;
     font-size: 30px;
-    background: fon.jpg;
     color: black;
     text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px #8bc63e, 0 0 35px #8bc63e, 0 0 40px #8bc63e, 0 0 50px #8bc63e, 0 0 75px #8bc63e;
 }
@@ -106,7 +102,6 @@
 .text-shadow-5 {
     font-family: Century Gothic;
     font-size: 30px;
-    background: fon.jpg;
     color: black;
     text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px #fcba30, 0 0 35px #fcba30, 0 0 40px #fcba30, 0 0 50px #fcba30, 0 0 75px #fcba30;
 }
@@ -114,7 +109,6 @@
 .text-shadow-6 {
     font-family: Century Gothic;
     font-size: 30px;
-    background: fon.jpg;
     color: black;
     text-shadow: 0 0 5px white, 0 0 10px white, 0 0 15px white, 0 0 20px #1ccfc9, 0 0 35px #1ccfc9, 0 0 40px #1ccfc9, 0 0 50px #1ccfc9, 0 0 75px #1ccfc9;
 }

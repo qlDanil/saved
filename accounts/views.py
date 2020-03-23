@@ -1,4 +1,3 @@
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.sites.shortcuts import get_current_site
 from django.utils.encoding import force_bytes, force_text
@@ -8,9 +7,6 @@ from .forms import SignUpForm
 from .tokens import account_activation_token
 from django.contrib.auth.models import User
 from django.core.mail import EmailMessage
-from django.contrib.auth.models import Group
-from .models import Picture
-from django.db import connection
 
 
 def signup(request):
@@ -36,13 +32,6 @@ def signup(request):
             )
             email.send()
             return render(request, 'accounts/signup_confirm.html',)
-        else:
-            cursor = connection.cursor()
-            cursor.execute("INSERT INTO accounts_picture (title, URL_way) VALUES ('Красная роза на фоне поляны', 'static/images/rose.png')")
-            cursor.execute("INSERT INTO accounts_picture (title, URL_way) VALUES ('Море в плохую погоду', 'static/images/sea.png')")
-            cursor.execute("SELECT * FROM accounts_picture WHERE title = 'Море в плохую погоду'")
-            row = cursor.fetchall()
-            print(row)
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
@@ -57,7 +46,6 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        user.groups.add(Group.objects.get(name='Service Users'))
         return render(request, 'accounts/signup_success.html',)
     else:
         return render(request, 'accounts/signup_failed.html',)

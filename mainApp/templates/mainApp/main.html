@@ -1,6 +1,5 @@
 {% extends "base_wrapper.html" %}
 {% load static %}
-{% load trans from i18n %}
 
 {% block title %}
     <title>Основная страница</title>
@@ -10,40 +9,46 @@
 
 {% block content %}
     <div class="container-fluid main-window">
-            <p ALIGN=LEFT><I>Небольшая галерея <span style="color:#ff3300;">избранных</span> картинок</I></p>
-            <hr align="center" size=3px color=#000000>
-            <p class="z1"> Здесь вы можете ориентироваться по разделам</p>
-            <ul class="border" ALIGN=LEFT>
-                <li><a href="#beuty">Красивые картинки</a>
-                <li><a href="#animals">Зверюшки</a>
-                <li><a href="#smiles">Смайлы</a>
-                <li><a href="#mems">Мемы</a>
-            </ul>
-            <hr align="center" size=3px color=#000000>
-            <p ALIGN=CENTER>
-            <p class="text-shadow-3" id="beauty">Красивые картинки</p>
-            <IMG SRC="{% static 'images/web2/pct3.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct4.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct12.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=5 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct15.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=5 VSPACE=5 HSPACE=5>
-            <hr align="center" size=3px color=#000000>
-            <p class="text-shadow-4" id="animals">Зверюшки</p>
-            <IMG SRC="{% static 'images/web2/pct8.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct11.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct13.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct2.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <hr align="center" size=3px color=#000000>
-            <p class="text-shadow-5" id="smiles">Смайлы</p>
-            <IMG SRC="{% static 'images/web2/pct9.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct10.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct14.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct5.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <hr align="center" size=3px color=#000000>
-            <p class="text-shadow-6" id="mems">Мемы</p>
-            <IMG SRC="{% static 'images/web2/pct6.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct7.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct1.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            <IMG SRC="{% static 'images/web2/pct16.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
-            </p>
+        <p ALIGN=LEFT><I>Небольшая галерея <span style="color:#ff3300;">избранных</span> картинок</I></p>
+        <hr align="center" size=3px color=#000000>
+        <p class="z1"> Здесь вы можете ориентироваться по разделам</p>
+        <ul class="border" ALIGN=LEFT>
+            <li><a href="#beuty">Красивые картинки</a>
+            <li><a href="#animals">Зверюшки</a>
+            <li><a href="#smiles">Смайлы</a>
+            <li><a href="#mems">Мемы</a>
+        </ul>
+        <h1>У вас {{ count }} фотографий!</h1>
+        <div class="container-fluid">
+            {% for photo in photos %}
+                <img class="img-fluid" src={{ photo.image.url }} alt={{ photo.title }}>
+            {% endfor %}
+        </div>
+        <hr align="center" size=3px color=#000000>
+        <p ALIGN=CENTER>
+        <p class="text-shadow-3" id="beauty">Красивые картинки</p>
+        <IMG SRC="{% static 'images/web2/pct3.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct4.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct12.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=5 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct15.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=5 VSPACE=5 HSPACE=5>
+        <hr align="center" size=3px color=#000000>
+        <p class="text-shadow-4" id="animals">Зверюшки</p>
+        <IMG SRC="{% static 'images/web2/pct8.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct11.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct13.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct2.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <hr align="center" size=3px color=#000000>
+        <p class="text-shadow-5" id="smiles">Смайлы</p>
+        <IMG SRC="{% static 'images/web2/pct9.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct10.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct14.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct5.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <hr align="center" size=3px color=#000000>
+        <p class="text-shadow-6" id="mems">Мемы</p>
+        <IMG SRC="{% static 'images/web2/pct6.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct7.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct1.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        <IMG SRC="{% static 'images/web2/pct16.jpg' %}" HEIGHT=300 WIDTH=300 ALIGN=middle BORDER=1 VSPACE=5 HSPACE=5>
+        </p>
     </div>
 {% endblock %}
