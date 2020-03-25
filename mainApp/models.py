@@ -13,10 +13,10 @@ class Photo(models.Model):
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
     image = models.ImageField(upload_to='photos')
     vk_id = models.IntegerField(null=True, blank=True)
-    date_time = models.DateTimeField(default=datetime.now())
+    date_time = models.DateTimeField(default=datetime.now)
 
     class Meta:
-        ordering = ["title"]
+        ordering = ["-date_time"]
 
     def get_absolute_url(self):
         return reverse('model-detail-view', args=[str(self.id)])

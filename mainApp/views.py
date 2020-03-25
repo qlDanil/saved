@@ -15,19 +15,19 @@ from social_django.models import UserSocialAuth
 def main_window(request):
     photos = Photo.objects.filter(owner=request.user)
     count = Photo.objects.filter(owner=request.user).count()
-    return render(request, 'mainApp/main.html', context={'photos': photos, 'count': count})
+    return render(request, 'mainApp/main.html', context={'photos': photos.order_by('-date_time'), 'count': count})
 
 
 @login_required
 def add_photo(request):
-    print(Photo.objects.filter(owner=request.user).values('vk_id'))
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
             image = form.cleaned_data['image']
             owner = request.user
-            new_photo = Photo.objects.create(title=title, image=image, owner=owner)
+            new_photo = Photo.objects.create(title=title, description=description, image=image, owner=owner)
             new_photo.save()
             return HttpResponseRedirect(reverse('main_window'))
     else:
