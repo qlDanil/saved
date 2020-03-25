@@ -9,12 +9,46 @@
 
 {% block content %}
     <div class="container-fluid" style="min-height: 200vh; padding-top: 20vh;">
-        <form action="" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <table>
-                {{ form }}
-            </table>
-            <input type="submit" value="Submit"/>
-        </form>
+        <div class="addpic">
+        <div class="container">
+         <form>
+             <div class="row">
+                 <div class="col-lg-4 col-md-4 col-sm-12 right text">
+                     <h1>Здесь будет ваше фото</h1>
+                 </div>
+                 <div class="col-lg-8 col-md-8 col-sm-12 right meadow">
+                     <div class="form-group">
+                         <input type="file" class="custom-file-input" id="inputGroupFile">
+                         <label class="custom-file-label" for="inputGroupFile">Выберите картинку..</label>
+                     </div>
+                     <div class="form-group">
+                         <div class="row">
+                         <div class="col-lg-1 col-md-1 col-sm-1 input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">#</span>
+                         </div>
+                         <div class="col-lg-7 col-md-7 col-sm-7">
+                         <input type="text" class="form-control" placeholder="Новый тег" aria-label="Новый тег" aria-describedby="basic-addon1">
+                         </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 input-group-append">
+                             <button class="btn btn-outline-secondary" type="button">Добавить</button>
+                         </div>
+                         </div>
+                     </div>
+                     <div class="form-group">
+                         <div class="row">
+                         <div class="col-lg-8 col-md-8 col-sm-8">
+                         <textarea class="form-control" placeholder="Описание картинки" aria-label="Описание картинки"></textarea>
+                         </div>
+                         <div class="col-lg-4 col-md-4 col-sm-4 input-group-append">
+                            <button class="btn btn-outline-secondary" type="button">Добавить</button>
+                         </div>
+                         </div>
+                     </div>
+                     <input type="submit" class="btn btn-secondary btn-block" value="Сохранить" name="">
+                 </div>
+             </div>
+         </form>
+     </div>
+    </div>
     </div>
 {% endblock %}
