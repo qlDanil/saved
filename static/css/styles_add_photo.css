@@ -1,0 +1,30 @@
+.addpic{
+ margin: 6em;
+ position: relative;
+}
+.addpic h1{
+ color:#10828C;
+ font-weight: bold;
+ font-size: 60px;
+ font-family: 'Vogue Highline Serif Medium';
+}
+
+.addpic .right{
+ max-width: 500px;
+}
+
+.addpic .right .btn{
+ background:  #10828C;
+ font-size: 20px;
+ color: white;
+ width: 100%;
+}
+
+.addpic .meadow{
+    margin-left: 2em;
+    padding: 1em;
+}
+
+.addpic .text{
+    border-right: 4px solid #10828C;
+}

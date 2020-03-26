@@ -1,0 +1,14 @@
+{% extends "base_wrapper.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Основная страница</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_profile.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" style="min-height: 200vh; padding-top: 20vh;">
+        <a href="{% url 'photo_import' %}"> Импортировать сохраненные фотографии Вконтакте</a>
+    </div>
+{% endblock %}

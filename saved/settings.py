@@ -116,6 +116,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
@@ -129,5 +132,5 @@ AUTHENTICATION_BACKENDS = (
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = '7346377'
 SOCIAL_AUTH_VK_OAUTH2_SECRET = 'LNLjEgOrBOeIu6cJQVYb'
-SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
+SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 # SOCIAL_AUTH_POSTGRES_JSONFIELD = True
