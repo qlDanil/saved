@@ -1,0 +1,31 @@
+{% extends "base_wrapper.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Основная страница</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_main.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid main-window">
+        <p ALIGN=LEFT><I>Небольшая галерея <span style="color:#ff3300;">избранных</span> картинок</I></p>
+        <hr align="center" size=3px color=#000000>
+        <p class="z1"> Здесь вы можете ориентироваться по разделам</p>
+        <ul class="border" ALIGN=LEFT>
+            <li><a href="#beuty">Красивые картинки</a>
+            <li><a href="#animals">Зверюшки</a>
+            <li><a href="#smiles">Смайлы</a>
+            <li><a href="#mems">Мемы</a>
+        </ul>
+        <h1>У вас {{ count }} фотографий!</h1>
+        <div class="container-fluid">
+        <p ALIGN=CENTER>
+            {% for photo in photos %}
+                <img class="img-fluid" src={{ photo.image.url }} alt={{ photo.title }} HEIGHT=310 WIDTH=310 ALIGN=middle
+                     BORDER=1 VSPACE=20 HSPACE=20>
+            {% endfor %}
+        </p>
+        </div>
+    </div>
+{% endblock %}
