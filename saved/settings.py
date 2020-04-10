@@ -144,7 +144,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = 'LNLjEgOrBOeIu6cJQVYb'
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 
 
-if not DEBUG:
+if DEBUG:
     SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
     # Set S3 as the place to store your files.
