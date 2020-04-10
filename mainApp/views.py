@@ -46,13 +46,13 @@ def photo_import(request):
     if 'state' not in request.GET:
         if len(UserSocialAuth.objects.filter(user=request.user, provider='vk-oauth2')) <= 0:
             return HttpResponseRedirect(
-                'https://oauth.vk.com/authorize?client_id=7346377&display=page&redirect_uri=http://127.0.0.1:8000'
-                '/photo_import&scope=photos&response_type=code&v=5.103&state=1')
+                'https://oauth.vk.com/authorize?client_id=7346377&display=page&redirect_uri=http://saved-production'
+                '.herokuapp.com/photo_import&scope=photos&response_type=code&v=5.103&state=1')
         vk_user = UserSocialAuth.objects.get(user=request.user, provider='vk-oauth2')
     elif request.GET['state'] == '1':
         response = requests.get(
             'https://oauth.vk.com/access_token?client_id=7346377&client_secret=LNLjEgOrBOeIu6cJQVYb&redirect_uri=http'
-            '://127.0.0.1:8000/photo_import&code=' + request.GET['code'] + '&state=2')
+            '://saved-production.herokuapp.com/photo_import&code=' + request.GET['code'] + '&state=2')
         UserSocialAuth.create_social_auth(user=request.user, uid=response.json()['user_id'], provider='vk-oauth2')
         vk_user = UserSocialAuth.objects.get(user=request.user, provider='vk-oauth2')
         vk_user.set_extra_data({'access_token': response.json()['access_token']})
