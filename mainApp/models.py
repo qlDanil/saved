@@ -9,8 +9,8 @@ from django.utils import timezone
 
 def get_upload_path(instance, filename):
     return os.path.join(
-        "user_%d(%s)" % (instance.owner.id, instance.owner.username), instance.date_time.strftime("%Y-%m-%d"),
-        filename)
+        "saved_photos", "user_%d(%s)" % (instance.owner.id, instance.owner.username),
+        instance.date_time.strftime("%Y-%m-%d"), filename)
 
 
 class Photo(models.Model):
