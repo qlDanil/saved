@@ -144,7 +144,7 @@ SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get("VK_OAUTH2_SECRET", 'LNLjEgOrBOeIu
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 
 
-if DEBUG:
+if not DEBUG:
     SOCIAL_AUTH_POSTGRES_JSONFIELD = True
 
     # Set S3 as the place to store your files.

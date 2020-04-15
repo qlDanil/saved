@@ -14,8 +14,7 @@
                 <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col-lg-4 col-md-4 col-sm-12 right text">
-                            <h1>Здесь будет ваше фото</h1>
+                        <div class="col-lg-4 col-md-4 col-sm-12 right preview" id="preview">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-12 right meadow">
                             <div class="form-group">
@@ -52,4 +51,5 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/scripts_add_photo.js' %}"></script>
 {% endblock %}

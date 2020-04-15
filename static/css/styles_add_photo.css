@@ -25,6 +25,12 @@
     padding: 1em;
 }
 
-.addpic .text{
+.addpic .preview{
     border-right: 4px solid #10828C;
 }
+
+.thumb {
+    width: 400px;
+    border: 1px solid #000;
+    margin: 10px;
+  }
