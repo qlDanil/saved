@@ -4,7 +4,6 @@ function handleFileSelect(evt) {
     if (file.type.match('image.*')) {
         var reader = new FileReader();
 
-        // Closure to capture the file information.
         reader.onload = (function (theFile) {
             return function (e) {
                 document.getElementById('preview').innerHTML = ['<img class="thumb" src="', e.target.result,

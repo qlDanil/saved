@@ -3,14 +3,14 @@
 
 {% block title %}
     <title>Основная страница</title>
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="{% static 'vendor/aos/aos.css' %}">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_main.css' %}">
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid main-window">
-        <p ALIGN=LEFT><I>Небольшая галерея <span style="color:#ff3300;">избранных</span> картинок</I></p>
-        <hr align="center" size=3px color=#000000>
+    <div class="site-wrap">
         <a class="a1" href="">#животные</a>
         <a class="a1" href="">#пейзажи</a>
         <a class="a1" href="">#мемы</a>
@@ -29,15 +29,34 @@
         <a class="a1" href="">#мода</a>
         <a class="a1" href="">#абстракция</a>
         <a class="a1" href="">#ретро</a>
-        <h1>У вас {{ count }} фотографий!</h1>
-        <div class="container-fluid">
-            <p ALIGN=CENTER>
-                {% for photo in photos %}
-                    <img class="img-fluid" src={{ photo.image.url }} alt={{ photo.title }} HEIGHT=310 WIDTH=310
-                         ALIGN=middle
-                         BORDER=1 VSPACE=20 HSPACE=20>
-                {% endfor %}
-            </p>
-        </div>
+        <hr align="center" size=3px color=#000000>
+        <p class="pl-5"><i>{{ count }} фотографий</i></p>
+        <main class="main-content">
+            <div class="container-fluid photos">
+                <div class="row align-items-stretch">
+                    {% for photo in photos %}
+                        {% if photo.id|divisibleby:"3" %}
+                            <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                        {% elif photo.id|divisibleby:"2" %}
+                            <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                        {% else %}
+                            <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
+                        {% endif %}
+                    <a href="#" class="d-block photo-item">
+                        <img src={{ photo.image.url }} alt="Image" class="img-fluid">
+                        <div class="photo-text-more">
+                            <div class="photo-text-more">
+                                <h3 class="heading">{{ photo.title }}</h3>
+                                <span class="meta">Хештеги</span>
+                            </div>
+                        </div>
+                    </a>
+                    </div>
+                    {% endfor %}
+                    </div>
+                    </div>
+        </main>
     </div>
+    <script src="{% static 'vendor/aos/aos.js' %}"></script>
+    <script src="{% static 'js/scripts_main.js' %}"></script>
 {% endblock %}
