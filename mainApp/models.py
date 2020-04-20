@@ -5,9 +5,19 @@ from django.core.files import File
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
+from django.db.models.aggregates import Count
+from random import randint
+
+
+class HashtagsManager(models.Manager):
+    def random(self):
+        count = self.aggregate(count=Count('id'))['count']
+        random_index = randint(0, count - 1)
+        return self.all()[random_index]
 
 
 class Hashtag(models.Model):
+    objects = HashtagsManager()
     tag = models.CharField(max_length=30)
 
     class Meta:

@@ -19,7 +19,7 @@
     transition: .3s;
 }
 
-.a1:hover {
+.a1:hover, .a1.active {
     background: #2EE59D;
     box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
     color: white;

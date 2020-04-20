@@ -11,24 +11,9 @@
 
 {% block content %}
     <div class="site-wrap">
-        <a class="a1" href="">#животные</a>
-        <a class="a1" href="">#пейзажи</a>
-        <a class="a1" href="">#мемы</a>
-        <a class="a1" href="">#космос</a>
-        <a class="a1" href="">#лес</a>
-        <a class="a1" href="">#весна</a>
-        <a class="a1" href="">#зима</a>
-        <a class="a1" href="">#игры</a>
-        <a class="a1" href="">#фильмы</a>
-        <a class="a1" href="">#сериалы</a>
-        <a class="a1" href="">#учеба</a>
-        <a class="a1" href="">#отдых</a>
-        <a class="a1" href="">#путешествия</a>
-        <a class="a1" href="">#книги</a>
-        <a class="a1" href="">#эстетика</a>
-        <a class="a1" href="">#мода</a>
-        <a class="a1" href="">#абстракция</a>
-        <a class="a1" href="">#ретро</a>
+        {% for hashtag in hashtags %}
+            <a class="a1" href="?hashtag={{hashtag.tag}}">#{{ hashtag.tag }}</a>
+        {% endfor %}
         <hr align="center" size=3px color=#000000>
         <p class="pl-5"><i>{{ count }} фотографий</i></p>
         <main class="main-content">
@@ -57,8 +42,8 @@
                     </a>
                     </div>
                     {% endfor %}
-                 </div>
-            </div>
+                    </div>
+                    </div>
         </main>
     </div>
     <script src="{% static 'vendor/aos/aos.js' %}"></script>
