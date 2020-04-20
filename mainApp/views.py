@@ -26,7 +26,6 @@ def main_window(request):
         if not hashtag == 'all' and Hashtag.objects.filter(tag=hashtag).exists():
             random_hashtags.append(Hashtag.objects.get(tag=hashtag))
             counter += 1
-            print(random_hashtags)
         while counter < min(hashtag_count, 10):
             random = Hashtag.objects.random()
             if random not in random_hashtags:

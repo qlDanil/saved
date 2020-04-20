@@ -12,7 +12,7 @@
 {% block content %}
     <div class="site-wrap">
         {% for hashtag in hashtags %}
-            <a class="a1" href="?hashtag={{hashtag.tag}}">#{{ hashtag.tag }}</a>
+            <a id={{ hashtag.tag }} class="a1" href="?hashtag={{hashtag.tag|urlencode}}">#{{ hashtag.tag }}</a>
         {% endfor %}
         <hr align="center" size=3px color=#000000>
         <p class="pl-5"><i>{{ count }} фотографий</i></p>

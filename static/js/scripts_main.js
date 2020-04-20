@@ -17,6 +17,6 @@ window.onload = function() {
             },
             {}
         );
-    var selector = '[href $= ' + params['hashtag'] + ']';
+    var selector = '[id = ' + params['hashtag'] + ']';
     $(selector).addClass('active');
 };
