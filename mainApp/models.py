@@ -7,6 +7,16 @@ from django.urls import reverse
 from django.utils import timezone
 
 
+class Hashtag(models.Model):
+    tag = models.CharField(max_length=30)
+
+    class Meta:
+        ordering = ["tag"]
+
+    def __str__(self):
+        return self.tag
+
+
 def get_upload_path(instance, filename):
     return os.path.join(
         "saved_photos", "user_%d(%s)" % (instance.owner.id, instance.owner.username),
@@ -16,9 +26,10 @@ def get_upload_path(instance, filename):
 class Photo(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
-    owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to=get_upload_path)
     vk_id = models.IntegerField(null=True, blank=True)
+    hashtags = models.ManyToManyField(Hashtag)
     date_time = models.DateTimeField(default=timezone.now)
 
     class Meta:

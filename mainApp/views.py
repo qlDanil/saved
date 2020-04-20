@@ -7,7 +7,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import PhotoForm
-from .models import Photo
+from .models import Photo, Hashtag
 from social_django.models import UserSocialAuth
 
 
@@ -28,6 +28,14 @@ def add_photo(request):
             image = form.cleaned_data['image']
             owner = request.user
             new_photo = Photo.objects.create(title=title, description=description, image=image, owner=owner)
+            new_photo.save()
+            hashtags = request.POST.getlist('hashtags[]')
+            for hashtag in hashtags:
+                if not Hashtag.objects.filter(tag=hashtag).exists():
+                    new_hashtag = Hashtag.objects.create(tag=hashtag)
+                    new_hashtag.save()
+                hashtag_object = Hashtag.objects.get(tag=hashtag)
+                new_photo.hashtags.add(hashtag_object)
             new_photo.save()
             return HttpResponseRedirect(reverse('main_window'))
     else:

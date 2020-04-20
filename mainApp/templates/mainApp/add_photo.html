@@ -24,18 +24,7 @@
                                 {{ form.image }}
                             </div>
                             <div class="form-group">
-                                <div class="row">
-                                    <div class="col-lg-1 col-md-1 col-sm-1 input-group-prepend">
-                                        <span class="input-group-text" id="basic-addon1">#</span>
-                                    </div>
-                                    <div class="col-lg-7 col-md-7 col-sm-7">
-                                        <input type="text" class="form-control" placeholder="Новый тег"
-                                               aria-label="Новый тег" aria-describedby="basic-addon1">
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-4 input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button">Добавить</button>
-                                    </div>
-                                </div>
+                                <div id="hashtags-app" class="app-container"></div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
@@ -51,5 +40,8 @@
             </div>
         </div>
     </div>
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="{% static 'js/hashtags_app.js' %}"></script>
     <script src="{% static 'js/scripts_add_photo.js' %}"></script>
 {% endblock %}
