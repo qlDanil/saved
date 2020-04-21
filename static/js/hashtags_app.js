@@ -59,7 +59,7 @@ class ItemList extends React.Component {
         }, Object.keys(this.props.hashtags).map(function (key) {
             return React.createElement("li", {
                 className: "list-inline-item m-1 p-1 bg-white"
-            }, this.props.hashtags[key], " ", React.createElement("button", {
+            }, "#", this.props.hashtags[key], " ", React.createElement("button", {
                 onClick: e => this.onDeleteClick(key, e),
                 type: "button",
                 className: "close",

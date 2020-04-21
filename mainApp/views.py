@@ -13,27 +13,36 @@ from social_django.models import UserSocialAuth
 
 @login_required
 def main_window(request):
-    hashtag = request.GET.get('hashtag', 'all')
-    if hashtag == 'all':
-        photos = Photo.objects.filter(owner=request.user)
-    else:
-        photos = Photo.objects.filter(owner=request.user, hashtags__tag=hashtag)
+    hashtags = request.GET.get('hashtag', 'all')
+    photos = Photo.objects.filter(owner=request.user)
+    if not hashtags == 'all':
+        hashtags = set(hashtags.split(' '))
+        for hashtag in hashtags:
+            photos = photos.filter(hashtags__tag=hashtag)
     count = photos.count()
     hashtag_count = Hashtag.objects.count()
     random_hashtags = []
     if hashtag_count > 0:
         counter = 0
-        if not hashtag == 'all' and Hashtag.objects.filter(tag=hashtag).exists():
-            random_hashtags.append(Hashtag.objects.get(tag=hashtag))
-            counter += 1
+        if not hashtags == 'all':
+            for hashtag in hashtags:
+                if Hashtag.objects.filter(tag=hashtag).exists():
+                    random_hashtags.append(Hashtag.objects.get(tag=hashtag))
+                    counter += 1
         while counter < min(hashtag_count, 10):
             random = Hashtag.objects.random()
             if random not in random_hashtags:
                 random_hashtags.append(random)
                 counter += 1
+    if not hashtags == 'all':
+        hashtags = ' '.join(hashtags) + ' '
+    else:
+        hashtags = ''
+    print(hashtags)
     return render(request, 'mainApp/main.html',
                   context={'photos': photos.order_by('-date_time'), 'count': count,
-                           'hashtags': sorted(random_hashtags, key=lambda hashtag: hashtag.tag)})
+                           'hashtags': sorted(random_hashtags, key=lambda hashtag: hashtag.tag),
+                           'current_hashtags': hashtags})
 
 
 @login_required
