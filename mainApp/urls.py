@@ -6,4 +6,5 @@ urlpatterns = [
     path('add_photo/', views.add_photo, name='add_photo'),
     path('profile/', views.profile, name='profile'),
     path('photo_import/', views.photo_import, name='photo_import'),
+    path('photo_<int:pk>/', views.detail_photo, name='detail_photo')
 ]

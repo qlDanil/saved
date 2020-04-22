@@ -29,14 +29,14 @@
                         {% else %}
                             <div class="col-6 col-md-6 col-lg-4" data-aos="fade-up">
                         {% endif %}
-                    <a href="#" class="d-block photo-item">
+                    <a href="/photo_{{ photo.id }}" class="d-block photo-item">
                         <img src={{ photo.image.url }} alt={{ photo.title }} class="img-fluid">
                         <div class="photo-text-more">
                             <div class="photo-text-more">
                                 <h3 class="heading">{{ photo.title }}</h3>
                                 <span class="meta">
                                 {% for hashtag in photo.hashtags.all %}
-                                    {{ hashtag }}
+                                    {{ hashtag.tag }}
                                 {% endfor %}
                                 </span>
                             </div>

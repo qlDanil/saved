@@ -3,7 +3,7 @@ import time
 import vk
 import requests
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, Http404
 from django.shortcuts import render
 from django.urls import reverse
 from .forms import PhotoForm
@@ -43,6 +43,16 @@ def main_window(request):
                   context={'photos': photos.order_by('-date_time'), 'count': count,
                            'hashtags': sorted(random_hashtags, key=lambda hashtag: hashtag.tag),
                            'current_hashtags': hashtags})
+
+
+@login_required
+def detail_photo(request, pk):
+    try:
+        photo = Photo.objects.filter(owner=request.user).get(pk=pk)
+    except Photo.DoesNotExist:
+        raise Http404("Book does not exist")
+
+    return render(request, 'mainApp/photo_detail.html', context={'photo': photo})
 
 
 @login_required
