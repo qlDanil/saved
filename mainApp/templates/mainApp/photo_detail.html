@@ -8,12 +8,15 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid" style="padding-top: 20vh;">
-        <p>{{ photo.title }}</p>
-        <img src={{ photo.image.url }}>
-        {% for hashtag in photo.hashtags.all %}
-            {{ hashtag.tag }}
-        {% endfor %}
-        <p>{{ photo.description }}</p>
+    <div class="container-fluid" style="padding-top: 15vh;padding-bottom: 10vh;">
+        <div class="container">
+            <p>{{ photo.title }}</p>
+            <img class="img-fluid" src={{ photo.image.url }}>
+            {% for hashtag in photo.hashtags.all %}
+                {{ hashtag.tag }}
+            {% endfor %}
+            <p>{{ photo.description }}</p>
+            <a class="btn btn-primary" href="{% url 'edit_photo' pk=photo.id %}">Редактировать</a>
+        </div>
     </div>
 {% endblock %}

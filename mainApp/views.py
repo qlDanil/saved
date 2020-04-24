@@ -50,7 +50,7 @@ def detail_photo(request, pk):
     try:
         photo = Photo.objects.filter(owner=request.user).get(pk=pk)
     except Photo.DoesNotExist:
-        raise Http404("Book does not exist")
+        raise Http404("Photo does not exist")
 
     return render(request, 'mainApp/photo_detail.html', context={'photo': photo})
 
@@ -77,6 +77,37 @@ def add_photo(request):
             return HttpResponseRedirect(reverse('main_window'))
     else:
         form = PhotoForm()
+    return render(request, 'mainApp/add_photo.html', {'form': form})
+
+
+@login_required
+def edit_photo(request, pk):
+    try:
+        photo = Photo.objects.filter(owner=request.user).get(pk=pk)
+    except Photo.DoesNotExist:
+        raise Http404("Photo does not exist")
+
+    if request.method == 'POST':
+        form = PhotoForm(request.POST, request.FILES)
+        print(form)
+        if form.is_valid():
+            photo.title = form.cleaned_data['title']
+            photo.description = form.cleaned_data['description']
+            photo.image = form.cleaned_data['image']
+            photo.hashtags.clear()
+            hashtags = request.POST.getlist('hashtags[]')
+            for hashtag in hashtags:
+                if not Hashtag.objects.filter(tag=hashtag).exists():
+                    new_hashtag = Hashtag.objects.create(tag=hashtag)
+                    new_hashtag.save()
+                hashtag_object = Hashtag.objects.get(tag=hashtag)
+                photo.hashtags.add(hashtag_object)
+            photo.save()
+            return HttpResponseRedirect(reverse('detail_photo', kwargs={'pk': photo.id}))
+    else:
+        form = PhotoForm(instance=photo)
+        print(form['image'].value())
+
     return render(request, 'mainApp/add_photo.html', {'form': form})
 
 
