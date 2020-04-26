@@ -30,4 +30,4 @@ class PhotoModelTest(TestCase):
 
     def test_get_absolute_url(self):
         photo = Photo.objects.get(id=1)
-        self.assertEquals(photo.get_absolute_url(), '/photo_1/')
+        self.assertEquals(photo.get_absolute_url(), '/photo_2/')
