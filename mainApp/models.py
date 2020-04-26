@@ -46,7 +46,7 @@ class Photo(models.Model):
         ordering = ["-date_time"]
 
     def get_absolute_url(self):
-        return reverse('model-detail-view', args=[str(self.id)])
+        return reverse('detail_photo', args=[str(self.id)])
 
     def __str__(self):
         return self.title

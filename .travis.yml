@@ -1,0 +1,23 @@
+language: python
+
+    python:
+
+      - "3.8.1"
+
+    services:
+
+      - mysql
+
+    env:
+
+      -DJANGO=1.8 DB=mysql
+    install:
+
+      - pip install -r requirements.txt
+
+    before_script:
+
+      - mysql -e 'create database test;' -u root
+    script:
+
+      - python manage.py test
