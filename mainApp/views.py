@@ -116,6 +116,14 @@ def profile(request):
     return render(request, 'mainApp/profile.html')
 
 
+def about(request):
+    return render(request, 'mainApp/about.html')
+
+
+def contact(request):
+    return render(request, 'mainApp/contact.html')
+
+
 @login_required
 def photo_import(request):
     vk_user = None
