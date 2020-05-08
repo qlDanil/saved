@@ -9,12 +9,16 @@ from django.urls import reverse
 from .forms import PhotoForm
 from .models import Photo, Hashtag
 from social_django.models import UserSocialAuth
+from django.db.models import Q
 
 
 @login_required
 def main_window(request):
     hashtags = request.GET.get('hashtag', 'all')
+    search = request.GET.get('search', 'all')
     photos = Photo.objects.filter(owner=request.user)
+    if not search == 'all':
+        photos = photos.filter(Q(hashtags__tag__icontains=search) | Q(description__icontains=search))
     if not hashtags == 'all':
         hashtags = set(hashtags.split(' '))
         for hashtag in hashtags:
@@ -89,11 +93,9 @@ def edit_photo(request, pk):
 
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
-        print(form)
         if form.is_valid():
             photo.title = form.cleaned_data['title']
             photo.description = form.cleaned_data['description']
-            photo.image = form.cleaned_data['image']
             photo.hashtags.clear()
             hashtags = request.POST.getlist('hashtags[]')
             for hashtag in hashtags:
@@ -106,9 +108,8 @@ def edit_photo(request, pk):
             return HttpResponseRedirect(reverse('detail_photo', kwargs={'pk': photo.id}))
     else:
         form = PhotoForm(instance=photo)
-        print(form['image'].value())
 
-    return render(request, 'mainApp/add_photo.html', {'form': form})
+    return render(request, 'mainApp/edit_photo.html', {'form': form, 'photo': photo})
 
 
 @login_required

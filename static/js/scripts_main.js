@@ -3,6 +3,7 @@ AOS.init({
     easing: 'slide',
     once: false
 });
+
 window.onload = function () {
     var params = window
         .location
@@ -27,3 +28,18 @@ window.onload = function () {
         }
     }
 };
+
+(function ($) {
+    "use strict";
+    $('#search-button').on('click', function () {
+        var search = $('#search-input').val();
+        document.location.href = "?search=" + encodeURI(search);
+    });
+    document.addEventListener('click', function (e) {
+        if (document.getElementById('search-group').contains(e.target)) {
+            $('#search-input').addClass('isFocus');
+        } else {
+            $('#search-input').removeClass('isFocus');
+        }
+    });
+})(jQuery);

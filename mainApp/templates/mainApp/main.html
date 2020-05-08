@@ -11,11 +11,17 @@
 
 {% block content %}
     <div class="site-wrap">
-    <a id = "hashtag-all" class="a1 active" href="/">All</a>
-        {% for hashtag in hashtags %}
-            <a id={{ hashtag.tag }} class="a1"
-               href="?hashtag={{ current_hashtags|urlencode }}{{ hashtag.tag|urlencode }}">#{{ hashtag.tag }}</a>
-        {% endfor %}
+        <div class="row">
+            <a id="hashtag-all" class="a1 active" href="/">All</a>
+            {% for hashtag in hashtags %}
+                <a id={{ hashtag.tag }} class="a1"
+                   href="?hashtag={{ current_hashtags|urlencode }}{{ hashtag.tag|urlencode }}">#{{ hashtag.tag }}</a>
+            {% endfor %}
+            <div class="input-field ml-5" id="search-group">
+                <input class="input" id="search-input" type="text" placeholder="Поиск"/>
+                <button class="search-button" id="search-button">Найти</button>
+            </div>
+        </div>
         <hr align="center" size=3px color=#000000>
         <p class="pl-5"><i>{{ count }} фотографий</i></p>
         <main class="main-content">
@@ -48,6 +54,7 @@
                     </div>
         </main>
     </div>
+    <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'vendor/aos/aos.js' %}"></script>
     <script src="{% static 'js/scripts_main.js' %}"></script>
 {% endblock %}

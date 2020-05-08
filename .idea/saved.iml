@@ -18,7 +18,7 @@
       <excludeFolder url="file://$MODULE_DIR$/saved/venv" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
     </content>
-    <orderEntry type="jdk" jdkName="Python 3.8 (pc)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.8 (saved)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
   <component name="TemplatesService">

@@ -3,8 +3,6 @@ class App extends React.Component {
         super(props);
         this.state = {
             hashtags: {
-                'hashtag-1': 'orange',
-                'hashtag-2': 'apple'
             }
         };
         this.deleteItem = this.deleteItem.bind(this);
