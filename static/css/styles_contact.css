@@ -1,0 +1,25 @@
+.contact{
+    background: #682a68;
+    border-radius: 10px 40px;
+    margin-top: 6em;
+    margin-right: 47em;
+    margin-left: 2em;
+    color: white;
+    font-size: 20px;
+    font-family: serif;
+}
+
+.mail{
+    margin-top: 1em;
+}
+
+a{
+    color: white;
+    font-size: 20px;
+    font-family: serif;
+}
+
+a:hover{
+    color: #682a68;
+    background: white;
+}
