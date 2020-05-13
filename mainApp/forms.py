@@ -3,6 +3,7 @@ from .models import Photo
 
 
 class PhotoForm(forms.ModelForm):
+    """Класс формы для добавления фотографии"""
     class Meta:
         model = Photo
         fields = ['title', 'description', 'image', ]

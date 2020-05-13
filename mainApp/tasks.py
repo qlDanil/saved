@@ -9,6 +9,11 @@ from celery_progress.backend import ProgressRecorder
 
 @shared_task(bind=True)
 def upload(self, vk_token, owner_id, user_id):
+    """Процесс импорта фотографий из Вконтакте для ассинхронного выполнения"""
+    if not Hashtag.objects.filter(tag='ВК').exists():
+        new_hashtag = Hashtag.objects.create(tag='ВК')
+        new_hashtag.save()
+    hashtag_vk = Hashtag.objects.get(tag='ВК')
     progress_recorder = ProgressRecorder(self)
     vk_api = vk.API(vk.Session(access_token=vk_token))
     album_id = -15
@@ -46,6 +51,7 @@ def upload(self, vk_token, owner_id, user_id):
             try:
                 new_photo = Photo.objects.create(title='Фото_' + str(photo['id']), description=photo['text'],
                                                  vk_id=photo['id'], owner=User.objects.get(id=user_id))
+                new_photo.hashtags.add(hashtag_vk)
                 new_photo.save_photo_from_url(url)
             except Exception:
                 print('Произошла ошибка, файл пропущен.')

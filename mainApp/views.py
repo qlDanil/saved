@@ -12,6 +12,7 @@ from .tasks import upload
 
 @login_required
 def main_window(request):
+    """Отображение главной страницы с фотографиями и хештегами"""
     hashtags = request.GET.get('hashtag', 'all')
     search = request.GET.get('search', 'all')
     photos = Photo.objects.filter(owner=request.user)
@@ -49,6 +50,7 @@ def main_window(request):
 
 @login_required
 def detail_photo(request, pk):
+    """Отображение страницы с детельной информацией об одной фотографии"""
     try:
         photo = Photo.objects.filter(owner=request.user).get(pk=pk)
     except Photo.DoesNotExist:
@@ -59,6 +61,7 @@ def detail_photo(request, pk):
 
 @login_required
 def add_photo(request):
+    """Отображение страницы с формой для добавления новой фотографии"""
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -84,6 +87,7 @@ def add_photo(request):
 
 @login_required
 def edit_photo(request, pk):
+    """Отображение страницы с формой для редактирования определенной фотографии"""
     try:
         photo = Photo.objects.filter(owner=request.user).get(pk=pk)
     except Photo.DoesNotExist:
@@ -112,19 +116,23 @@ def edit_photo(request, pk):
 
 @login_required
 def profile(request):
+    """Отображение страницы с настройками пользователя"""
     return render(request, 'mainApp/profile.html', context={'task_id': None})
 
 
 def about(request):
+    """Отображение страницы "О нас" """
     return render(request, 'mainApp/about.html')
 
 
 def contact(request):
+    """Отображение страницы "Контакты" """
     return render(request, 'mainApp/contact.html')
 
 
 @login_required
 def photo_import(request):
+    """Отображение страницы в момент импорта фотографий из Вконтакте"""
     vk_user = None
     if 'state' not in request.GET:
         if len(UserSocialAuth.objects.filter(user=request.user, provider='vk-oauth2')) <= 0:

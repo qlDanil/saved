@@ -10,6 +10,7 @@ from random import randint
 
 
 class HashtagsManager(models.Manager):
+    """Класс-менеджер для выбора случайного хештега"""
     def random(self):
         count = self.aggregate(count=Count('id'))['count']
         random_index = randint(0, count - 1)
@@ -17,6 +18,7 @@ class HashtagsManager(models.Manager):
 
 
 class Hashtag(models.Model):
+    """Класс-модель хештег"""
     objects = HashtagsManager()
     tag = models.CharField(max_length=30)
 
@@ -28,12 +30,14 @@ class Hashtag(models.Model):
 
 
 def get_upload_path(instance, filename):
+    """Вычисление пути сохранения фотографий пользователя"""
     return os.path.join(
         "saved_photos", "user_%d(%s)" % (instance.owner.id, instance.owner.username),
         instance.date_time.strftime("%Y-%m-%d"), filename)
 
 
 class Photo(models.Model):
+    """Класс-модель фотография"""
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=100)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -52,6 +56,7 @@ class Photo(models.Model):
         return self.title
 
     def save_photo_from_url(self, url):
+        """Сохранение фотографии по url"""
         result = urlretrieve(url)
         self.image.save(
             os.path.basename(url),

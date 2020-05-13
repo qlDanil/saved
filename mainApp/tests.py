@@ -3,7 +3,7 @@ from .models import Photo
 
 
 class PhotoModelTest(TestCase):
-
+    """Класс тестирования функционала веб-сервиса"""
     @classmethod
     def setUpTestData(cls):
         Photo.objects.create(title='Big', description='Bob')
