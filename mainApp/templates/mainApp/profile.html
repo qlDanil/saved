@@ -8,7 +8,9 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container-fluid" style="min-height: 200vh; padding-top: 20vh;">
-        <a href="{% url 'photo_import' %}"> Импортировать сохраненные фотографии Вконтакте</a>
-    </div>
+     <div class="container">
+	    <div>
+         <p class="a2" href={% url 'photo_import' %}> Импортировать сохраненные фотографии <span style="color:#0099CC;">Вконтакте</span></p>
+	    </div>
+     </div>
 {% endblock %}
