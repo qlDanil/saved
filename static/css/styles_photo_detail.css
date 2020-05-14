@@ -12,7 +12,7 @@
     height: 300px
 }
 
-.pic .meadow .btn {
+.pic .meadow>.btn {
     background: #682a68;
     font-size: 20px;
     color: white;

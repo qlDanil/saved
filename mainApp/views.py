@@ -149,3 +149,14 @@ def photo_import(request):
         vk_user.set_extra_data({'access_token': response.json()['access_token']})
     imports = upload.delay(vk_user.access_token, vk_user.uid, request.user.id)
     return render(request, 'mainApp/profile.html', context={'task_id': imports.task_id})
+
+
+@login_required
+def photo_delete(request, pk):
+    """Удаление конкретной фотографии"""
+    try:
+        photo = Photo.objects.filter(owner=request.user).get(pk=pk)
+        photo.delete()
+    except Photo.DoesNotExist:
+        raise Http404("Photo does not exist")
+    return HttpResponseRedirect(reverse('main_window'))
