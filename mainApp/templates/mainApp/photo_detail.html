@@ -1,0 +1,41 @@
+{% extends "base_wrapper.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Основная страница</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_photo_detail.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" style="padding-top: 15vh;padding-bottom: 10vh;">
+    <div class="pic">
+        <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12 ">
+                <img class="img-fluid" src={{ photo.image.url }}>
+            </div>
+
+            <div class="col-lg-8 col-md-8 col-sm-12  meadow">
+            <p class="el title">Название: {{ photo.title }}</p>
+            <div class="el">
+            <div class="row">
+                <div class="col-lg-2 col-md-2 col-sm-2 input-group-prepend">
+                           <p class="tag">#</p>
+                 </div>
+            <div class="col-lg-10 col-md-10 col-sm-10 input-group-prepend tags">
+            {% for hashtag in photo.hashtags.all %}
+                {{ hashtag.tag }}
+                <pre>; </pre>
+            {% endfor %}
+            </div>
+            </div>
+            </div>
+            <p class="el discr">{{ photo.description }}</p>
+            <a class="btn btn-primary el" href="{% url 'edit_photo' pk=photo.id %}">Редактировать</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

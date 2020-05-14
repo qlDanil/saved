@@ -3,6 +3,7 @@ from .models import Photo
 
 
 class PhotoForm(forms.ModelForm):
+    """Класс формы для добавления фотографии"""
     class Meta:
         model = Photo
         fields = ['title', 'description', 'image', ]
@@ -13,6 +14,10 @@ class PhotoForm(forms.ModelForm):
             'description': forms.Textarea(
                 attrs={'class': 'form-control', 'placeholder': 'Описание картинки'}),
             'image': forms.widgets.FileInput(
-                attrs={'class': 'form-image'}
+                attrs={'class': 'form-image', 'accept': 'image/*'}
             )
         }
+
+    def __init__(self, *args, **kwargs):
+        super(PhotoForm, self).__init__(*args, **kwargs)
+        self.fields['image'].required = False

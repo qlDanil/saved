@@ -1,36 +1,33 @@
-.addpic{
- margin: 6em;
- position: relative;
-}
-.addpic h1{
- color:#10828C;
- font-weight: bold;
- font-size: 60px;
- font-family: 'Vogue Highline Serif Medium';
+.addpic {
+    margin: 6em;
+    position: relative;
 }
 
-.addpic .right{
- max-width: 500px;
+.addpic .right {
+    max-width: 500px;
 }
 
-.addpic .right .btn{
- background:  #10828C;
- font-size: 20px;
- color: white;
- width: 100%;
+.addpic .right .btn {
+    background: #682a68;
+    font-size: 20px;
+    color: white;
 }
 
-.addpic .meadow{
+.addpic .right .btn:hover, .addpic .right .btn:focus  {
+    background: #680268;
+}
+
+.addpic .meadow {
     margin-left: 2em;
     padding: 1em;
 }
 
-.addpic .preview{
-    border-right: 4px solid #10828C;
+.addpic .preview {
+    border-right: 4px solid #682a68;
 }
 
 .thumb {
     width: 400px;
     border: 1px solid #000;
     margin: 10px;
-  }
+}

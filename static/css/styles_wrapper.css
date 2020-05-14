@@ -3,17 +3,23 @@ html {
     min-height: 100%;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    background: url("../images/background.png");
+}
+
 .navbar {
+    font-family: 'Philosopher', sans-serif;
     transition: all 0.4s;
 }
 
 .navbar .nav-link {
-    color: #fff;
+    color: #682a68;
 }
 
 .navbar .nav-link:hover,
 .navbar .nav-link:focus {
-    color: #555;
+    color: #000;
     text-decoration: none;
 }
 
@@ -23,7 +29,7 @@ html {
 }
 
 .navbar.active .nav-link {
-    color: #555;
+    color: #682a68;
 }
 
 .navbar.active .nav-link:hover,

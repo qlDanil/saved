@@ -15,13 +15,11 @@
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-lg-4 col-md-4 col-sm-12 right preview" id="preview">
+                            <img class="thumb" src="{{ photo.image.url }}">
                         </div>
                         <div class="col-lg-8 col-md-8 col-sm-12 right meadow">
                             <div class="form-group">
                                 {{ form.title }}
-                            </div>
-                            <div class="form-group">
-                                {{ form.image }}
                             </div>
                             <div class="form-group">
                                 <div id="hashtags-app" class="app-container"></div>

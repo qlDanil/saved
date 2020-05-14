@@ -10,6 +10,7 @@ from django.core.mail import EmailMessage
 
 
 def signup(request):
+    """Отображение страницы регистрации пользователя"""
     if request.method == 'GET':
         return render(request, 'accounts/signup.html')
     if request.method == 'POST':
@@ -38,6 +39,7 @@ def signup(request):
 
 
 def activate(request, uidb64, token):
+    """Отображение страницы с результатом активации аккаунта пользователя"""
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(id=uid)

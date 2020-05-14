@@ -1,0 +1,47 @@
+.pic{
+    margin: 6em;
+    position: relative;
+}
+.pic .img-fluid{
+    height: 300px;
+    border: 1px solid #000;
+    margin: 10px;
+  }
+.pic .meadow {
+    border-left: 4px solid #682a68;
+    height: 300px
+}
+
+.pic .meadow .btn {
+    background: #682a68;
+    font-size: 20px;
+    color: white;
+    bottom: 0;
+    border: 1px solid #682a68;
+}
+
+ .pic .discr {
+     border: 1px solid #000;
+    padding: 2px;
+     border-radius: 6px;
+}
+
+ .pic .title {
+     background-color: #682a68;
+     color: white;
+     padding: 7px;
+     border: 1px solid #682a68;
+     border-radius: 6px;
+ }
+
+.pic .meadow .el {
+    margin: 15px;
+}
+
+.pic  .tag {
+    background-color: #682a68;
+    color: white;
+    border: 1px solid #000;
+    padding: 3px;
+    border-radius: 6px;
+}
