@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.db.models.aggregates import Count
 from random import randint
+from django.dispatch import receiver
 
 
 class HashtagsManager(models.Manager):
@@ -63,3 +64,9 @@ class Photo(models.Model):
             File(open(result[0], 'rb'))
         )
         self.save()
+
+
+@receiver(models.signals.post_delete, sender=Photo)
+def remove_file_from_s3(sender, instance, using, **kwargs):
+    """Сигнал для удаления файла из aws3 при удалении из базы данных"""
+    instance.image.delete(save=False)
