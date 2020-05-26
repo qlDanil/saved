@@ -17,17 +17,16 @@
                     </div>
 
                     <div class="col-lg-8 col-md-8 col-sm-12 meadow">
-                        <p class="el title">Название: {{ photo.title }}</p>
-                        <div class="el">
-                            <div class="row">
+                        <p class="el title">{{ photo.title }}</p>
+                            <div class="row el">
                                 <div class="col-lg-10 col-md-10 col-sm-10 input-group-prepend tags">
-                                <p class="tag">#</p>
+                                    <p style="color: black;">Ключевые слова:</p>
                                     {% for hashtag in photo.hashtags.all %}
-                                        {{ hashtag.tag }}
-                                        <pre>; </pre>
+                                        <pre> </pre>
+                                        <a href="/?search={{ hashtag.tag|urlencode }}" class="tag">{{ hashtag.tag }}</a>
+                                        <pre>;</pre>
                                     {% endfor %}
                                 </div>
-                            </div>
                         </div>
                         <p class="el discr">{{ photo.description }}</p>
                         <a class="btn btn-primary el" href="{% url 'edit_photo' pk=photo.id %}">Редактировать</a>

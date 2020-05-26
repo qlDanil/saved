@@ -1,47 +1,74 @@
-.pic{
+.pic {
     margin: 6em;
     position: relative;
-}
-.pic .img-fluid{
-    height: 300px;
-    border: 1px solid #000;
-    margin: 10px;
-  }
-.pic .meadow {
-    border-left: 4px solid #682a68;
-    height: 300px
+    font-family: 'Open Sans', sans-serif;
 }
 
-.pic .meadow>.btn {
+.pic .img-fluid {
+    max-width: 100%;
+}
+
+.pic .meadow {
+    border-left: 4px solid #682a68;
+    border-radius: 4px;
+    height: 100%;
+    background: radial-gradient(circle, rgba(199, 199, 199, 1) 0%, rgba(223, 223, 223, 1) 100%);
+}
+
+.pic .meadow > .btn {
     background: #682a68;
+    border-radius: 4px;
     font-size: 20px;
     color: white;
     bottom: 0;
-    border: 1px solid #682a68;
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    font-weight: 700;
+    font-size: 15px;
+    float: left;
 }
 
- .pic .discr {
-     border: 1px solid #000;
-    padding: 2px;
-     border-radius: 6px;
+.pic .meadow > .btn:hover {
+    background: #680268;
 }
 
- .pic .title {
-     background-color: #682a68;
-     color: white;
-     padding: 7px;
-     border: 1px solid #682a68;
-     border-radius: 6px;
- }
+.pic .discr {
+    color: #000;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.pic .title {
+    color: #000;
+    padding-bottom: 7px;
+    font-size: 42px;
+    font-weight: 500;
+    font-family: 'Philosopher', sans-serif;
+}
 
 .pic .meadow .el {
     margin: 15px;
 }
 
-.pic  .tag {
-    background-color: #682a68;
-    color: white;
-    border: 1px solid #000;
+.pic .tag {
+    background: rgb(230, 230, 230);
+    border-radius: 7px;
+    height: 75%;
+    padding: 1px;
+    cursor: pointer;
+    color: #4b4b4b;
+}
+
+.pic .tag:hover {
+    text-decoration: none;
+    background: rgb(190, 190, 190);
+}
+
+.pic .tags {
+    font-style: italic;
+    color: #4b4b4b;
     padding: 3px;
-    border-radius: 6px;
+    font-size: 20px;
+    font-weight: 500;
 }

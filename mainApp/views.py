@@ -117,7 +117,7 @@ def edit_photo(request, pk):
 @login_required
 def profile(request):
     """Отображение страницы с настройками пользователя"""
-    return render(request, 'mainApp/profile.html', context={'task_id': None})
+    return render(request, 'mainApp/profile.html')
 
 
 def about(request):
@@ -148,7 +148,7 @@ def photo_import(request):
         vk_user = UserSocialAuth.objects.get(user=request.user, provider='vk-oauth2')
         vk_user.set_extra_data({'access_token': response.json()['access_token']})
     imports = upload.delay(vk_user.access_token, vk_user.uid, request.user.id)
-    return render(request, 'mainApp/profile.html', context={'task_id': imports.task_id})
+    return render(request, 'mainApp/photo_import.html', context={'task_id': imports.task_id})
 
 
 @login_required

@@ -1,4 +1,3 @@
-
 .a2 {
   text-decoration: none;
   outline: none;
@@ -19,6 +18,7 @@
   box-shadow: 0 8px 15px rgba(0,0,0,.1);
   transition: .3s;
 }
+
 .a2:hover {
   background: #2EE59D;
   box-shadow: 0 15px 20px rgba(46,229,157,.4);
@@ -31,8 +31,4 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-}
-
-#progress-bar {
-  margin-top: 1em;
 }
