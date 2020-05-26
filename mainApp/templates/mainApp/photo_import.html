@@ -10,9 +10,10 @@
 {% block content %}
     <div class="container-fluid" style="padding-top: 20vh;">
         <div class='progress-wrapper'>
-            <div id='progress-bar' class='progress-bar' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+            <div id='progress-bar' class='progress-bar progress-bar-striped progress-bar-animated' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
         </div>
         <div id="progress-bar-message">Waiting for progress to start...</div>
+        <div id="celery-result"></div>
         <input type="hidden" id="Url" data-url="{% url 'celery_progress:task_status' task_id %}"/>
     </div>
     <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
