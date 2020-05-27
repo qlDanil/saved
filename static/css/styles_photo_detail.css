@@ -1,18 +1,21 @@
 .pic {
-    margin: 6em;
+    margin: 5em;
     position: relative;
     font-family: 'Open Sans', sans-serif;
 }
 
 .pic .img-fluid {
     max-width: 100%;
+    border-right: 4px solid #682a68;
+    border-radius: 4px;
+    padding: 1em;
 }
 
 .pic .meadow {
-    border-left: 4px solid #682a68;
-    border-radius: 4px;
+    /*border-left: 4px solid #682a68;
+    border-radius: 4px;*/
     height: 100%;
-    background: radial-gradient(circle, rgba(199, 199, 199, 1) 0%, rgba(223, 223, 223, 1) 100%);
+    background: radial-gradient(circle, rgba(199, 199, 199, 0.39) 0%, rgba(223, 223, 223, 0.39) 100%);
 }
 
 .pic .meadow > .btn {

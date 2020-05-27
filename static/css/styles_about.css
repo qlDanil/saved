@@ -5,7 +5,7 @@
 }
 .team h1{
  margin: 1em;
- color:#682a68;
+ color: #682a68;
  font-weight: bold;
  font-size: 30px;
  font-family: 'Philosopher', sans-serif;
@@ -13,21 +13,24 @@
 .team .item{
  position: relative;
 }
+.team .img-fluid{
+ width: 300px;
+}
 .team .des{
- background: #682a68;
+ background: grey;
  color: white;
  text-align: center;
  border-bottom-left-radius: 93%;
  transition:.3s ease-in-out;
  font-family: 'Philosopher', sans-serif;
  font-weight: bold;
- width: 86%;
+ width: 300px;
 }
 .team .text-muted{
  font-family: 'Philosopher', sans-serif;
  color: #513629;
 }
-.team .item:hover .des{
+/*.team .item:hover .des{
  height: 100%;
  background: rgba(104, 42, 104, 0.85);
  position: absolute;
@@ -35,7 +38,7 @@
  padding: 5em;
  top: 0;
  border-bottom-left-radius: 0;
-}
+}*/
 
 .team .s{
     font-size: 20px;

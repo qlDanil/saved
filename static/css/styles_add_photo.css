@@ -20,10 +20,12 @@
 .addpic .meadow {
     margin-left: 2em;
     padding: 1em;
+    border-left: 4px solid #682a68;
+    border-radius: 4px;
 }
 
 .addpic .preview {
-    border-right: 4px solid #682a68;
+    /*border-right: 4px solid #682a68;*/
 }
 
 .thumb {
