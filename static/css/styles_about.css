@@ -17,20 +17,21 @@
  width: 300px;
 }
 .team .des{
- background: grey;
- color: white;
+ color: #682a68;
  text-align: center;
- border-bottom-left-radius: 93%;
+/* border-bottom-left-radius: 93%;
+ width: 86%;
  transition:.3s ease-in-out;
+ background: grey;*/
  font-family: 'Philosopher', sans-serif;
  font-weight: bold;
- width: 300px;
+ font-size: 20px;
 }
-.team .text-muted{
+/*.team .text-muted{
  font-family: 'Philosopher', sans-serif;
- color: #513629;
+  color: white;
 }
-/*.team .item:hover .des{
+.team .item:hover .des{
  height: 100%;
  background: rgba(104, 42, 104, 0.85);
  position: absolute;
