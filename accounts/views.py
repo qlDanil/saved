@@ -10,7 +10,7 @@ from django.core.mail import EmailMessage
 
 
 def signup(request):
-    """Отображение страницы регистрации пользователя"""
+    """Отображение страницы регистрации пользователя. Входные данные: запрос. Выходные: рендер страницы."""
     if request.method == 'GET':
         return render(request, 'accounts/signup.html')
     if request.method == 'POST':
@@ -32,14 +32,15 @@ def signup(request):
                 mail_subject, message, to=[to_email]
             )
             email.send()
-            return render(request, 'accounts/signup_confirm.html',)
+            return render(request, 'accounts/signup_confirm.html', )
     else:
         form = SignUpForm()
     return render(request, 'accounts/signup.html', {'form': form})
 
 
 def activate(request, uidb64, token):
-    """Отображение страницы с результатом активации аккаунта пользователя"""
+    """Отображение страницы с результатом активации аккаунта пользователя. Входные данные: запрос. Выходные: рендер
+    страницы. """
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(id=uid)
@@ -48,6 +49,6 @@ def activate(request, uidb64, token):
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
         user.save()
-        return render(request, 'accounts/signup_success.html',)
+        return render(request, 'accounts/signup_success.html', )
     else:
-        return render(request, 'accounts/signup_failed.html',)
+        return render(request, 'accounts/signup_failed.html', )

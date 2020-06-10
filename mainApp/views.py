@@ -12,12 +12,12 @@ from .tasks import upload
 
 @login_required
 def main_window(request):
-    """Отображение главной страницы с фотографиями и хештегами"""
+    """Отображение главной страницы с фотографиями и хештегами. Входные данные: запрос. Выходные: рендер страницы."""
     hashtags = request.GET.get('hashtag', 'all')
     search = request.GET.get('search', 'all')
     photos = Photo.objects.filter(owner=request.user)
     if not search == 'all':
-        photos = photos.filter(Q(hashtags__tag__icontains=search) | Q(description__icontains=search))
+        photos = photos.filter(Q(description__icontains=search))
     if not hashtags == 'all':
         hashtags = set(hashtags.split(' '))
         for hashtag in hashtags:
@@ -50,7 +50,8 @@ def main_window(request):
 
 @login_required
 def detail_photo(request, pk):
-    """Отображение страницы с детельной информацией об одной фотографии"""
+    """Отображение страницы с детельной информацией об одной фотографии. Входные данные: запрос. Выходные: рендер
+    страницы. """
     try:
         photo = Photo.objects.filter(owner=request.user).get(pk=pk)
     except Photo.DoesNotExist:
@@ -61,7 +62,8 @@ def detail_photo(request, pk):
 
 @login_required
 def add_photo(request):
-    """Отображение страницы с формой для добавления новой фотографии"""
+    """Отображение страницы с формой для добавления новой фотографии. Входные данные: запрос. Выходные: рендер
+    страницы. """
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
@@ -87,7 +89,8 @@ def add_photo(request):
 
 @login_required
 def edit_photo(request, pk):
-    """Отображение страницы с формой для редактирования определенной фотографии"""
+    """Отображение страницы с формой для редактирования определенной фотографии. Входные данные: запрос. Выходные:
+    рендер страницы. """
     try:
         photo = Photo.objects.filter(owner=request.user).get(pk=pk)
     except Photo.DoesNotExist:
@@ -116,23 +119,24 @@ def edit_photo(request, pk):
 
 @login_required
 def profile(request):
-    """Отображение страницы с настройками пользователя"""
+    """Отображение страницы с настройками пользователя. Входные данные: запрос. Выходные: рендер страницы."""
     return render(request, 'mainApp/profile.html')
 
 
 def about(request):
-    """Отображение страницы "О нас" """
+    """Отображение страницы "О нас". Входные данные: запрос. Выходные: рендер страницы."""
     return render(request, 'mainApp/about.html')
 
 
 def contact(request):
-    """Отображение страницы "Контакты" """
+    """Отображение страницы "Контакты". Входные данные: запрос. Выходные: рендер страницы."""
     return render(request, 'mainApp/contact.html')
 
 
 @login_required
 def photo_import(request):
-    """Отображение страницы в момент импорта фотографий из Вконтакте"""
+    """Отображение страницы в момент импорта фотографий из Вконтакте. Входные данные: запрос. Выходные: рендер
+    страницы. """
     vk_user = None
     if 'state' not in request.GET:
         if len(UserSocialAuth.objects.filter(user=request.user, provider='vk-oauth2')) <= 0:
@@ -153,7 +157,7 @@ def photo_import(request):
 
 @login_required
 def photo_delete(request, pk):
-    """Удаление конкретной фотографии"""
+    """Удаление конкретной фотографии. Входные данные: запрос. Выходные: рендер страницы."""
     try:
         photo = Photo.objects.filter(owner=request.user).get(pk=pk)
         photo.delete()

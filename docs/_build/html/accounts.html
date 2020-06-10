@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <title>accounts package &#8212; документация Saved 1.0</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/translations.js"></script>
+    <link rel="index" title="Алфавитный указатель" href="genindex.html" />
+    <link rel="search" title="Поиск" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="accounts-package">
+<h1>accounts package<a class="headerlink" href="#accounts-package" title="Ссылка на этот заголовок">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Ссылка на этот заголовок">¶</a></h2>
+</div>
+<div class="section" id="module-accounts.admin">
+<span id="accounts-admin-module"></span><h2>accounts.admin module<a class="headerlink" href="#module-accounts.admin" title="Ссылка на этот заголовок">¶</a></h2>
+</div>
+<div class="section" id="module-accounts.apps">
+<span id="accounts-apps-module"></span><h2>accounts.apps module<a class="headerlink" href="#module-accounts.apps" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt id="accounts.apps.AccountsConfig">
+<em class="property">class </em><code class="sig-prename descclassname">accounts.apps.</code><code class="sig-name descname">AccountsConfig</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">app_name</span></em>, <em class="sig-param"><span class="n">app_module</span></em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.apps.AccountsConfig" title="Ссылка на это определение">¶</a></dt>
+<dd><blockquote>
+<div><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.apps.config.AppConfig</span></code></p>
+</div></blockquote>
+<dl class="py attribute">
+<dt id="accounts.apps.AccountsConfig.name">
+<code class="sig-name descname">name</code><em class="property"> = 'accounts'</em><a class="headerlink" href="#accounts.apps.AccountsConfig.name" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-accounts.forms">
+<span id="accounts-forms-module"></span><h2>accounts.forms module<a class="headerlink" href="#module-accounts.forms" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt id="accounts.forms.SignUpForm">
+<em class="property">class </em><code class="sig-prename descclassname">accounts.forms.</code><code class="sig-name descname">SignUpForm</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.forms.SignUpForm" title="Ссылка на это определение">¶</a></dt>
+<dd><blockquote>
+<div><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.forms.UserCreationForm</span></code></p>
+</div></blockquote>
+<p>Форма для регистрации пользователя</p>
+<dl class="py class">
+<dt id="accounts.forms.SignUpForm.Meta">
+<em class="property">class </em><code class="sig-name descname">Meta</code><a class="headerlink" href="#accounts.forms.SignUpForm.Meta" title="Ссылка на это определение">¶</a></dt>
+<dd><blockquote>
+<div><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</div></blockquote>
+<dl class="py attribute">
+<dt id="accounts.forms.SignUpForm.Meta.fields">
+<code class="sig-name descname">fields</code><em class="property"> = ('email', 'first_name', 'username')</em><a class="headerlink" href="#accounts.forms.SignUpForm.Meta.fields" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="accounts.forms.SignUpForm.Meta.model">
+<code class="sig-name descname">model</code><a class="headerlink" href="#accounts.forms.SignUpForm.Meta.model" title="Ссылка на это определение">¶</a></dt>
+<dd><p>псевдоним класса <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.models.User</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="accounts.forms.SignUpForm.base_fields">
+<code class="sig-name descname">base_fields</code><em class="property"> = {'email': &lt;django.forms.fields.EmailField object&gt;, 'first_name': &lt;django.forms.fields.CharField object&gt;, 'password1': &lt;django.forms.fields.CharField object&gt;, 'password2': &lt;django.forms.fields.CharField object&gt;, 'username': &lt;django.forms.fields.CharField object&gt;}</em><a class="headerlink" href="#accounts.forms.SignUpForm.base_fields" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="accounts.forms.SignUpForm.declared_fields">
+<code class="sig-name descname">declared_fields</code><em class="property"> = {'password1': &lt;django.forms.fields.CharField object&gt;, 'password2': &lt;django.forms.fields.CharField object&gt;}</em><a class="headerlink" href="#accounts.forms.SignUpForm.declared_fields" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="accounts.forms.SignUpForm.media">
+<em class="property">property </em><code class="sig-name descname">media</code><a class="headerlink" href="#accounts.forms.SignUpForm.media" title="Ссылка на это определение">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-accounts.models">
+<span id="accounts-models-module"></span><h2>accounts.models module<a class="headerlink" href="#module-accounts.models" title="Ссылка на этот заголовок">¶</a></h2>
+</div>
+<div class="section" id="module-accounts.tests">
+<span id="accounts-tests-module"></span><h2>accounts.tests module<a class="headerlink" href="#module-accounts.tests" title="Ссылка на этот заголовок">¶</a></h2>
+</div>
+<div class="section" id="module-accounts.tokens">
+<span id="accounts-tokens-module"></span><h2>accounts.tokens module<a class="headerlink" href="#module-accounts.tokens" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py class">
+<dt id="accounts.tokens.AccountActivationTokenGenerator">
+<em class="property">class </em><code class="sig-prename descclassname">accounts.tokens.</code><code class="sig-name descname">AccountActivationTokenGenerator</code><a class="headerlink" href="#accounts.tokens.AccountActivationTokenGenerator" title="Ссылка на это определение">¶</a></dt>
+<dd><blockquote>
+<div><p>Базовые классы: <code class="xref py py-class docutils literal notranslate"><span class="pre">django.contrib.auth.tokens.PasswordResetTokenGenerator</span></code></p>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="module-accounts.urls">
+<span id="accounts-urls-module"></span><h2>accounts.urls module<a class="headerlink" href="#module-accounts.urls" title="Ссылка на этот заголовок">¶</a></h2>
+</div>
+<div class="section" id="module-accounts.views">
+<span id="accounts-views-module"></span><h2>accounts.views module<a class="headerlink" href="#module-accounts.views" title="Ссылка на этот заголовок">¶</a></h2>
+<dl class="py function">
+<dt id="accounts.views.activate">
+<code class="sig-prename descclassname">accounts.views.</code><code class="sig-name descname">activate</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em>, <em class="sig-param"><span class="n">uidb64</span></em>, <em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.activate" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Отображение страницы с результатом активации аккаунта пользователя. Входные данные: запрос. Выходные: рендер страницы.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt id="accounts.views.signup">
+<code class="sig-prename descclassname">accounts.views.</code><code class="sig-name descname">signup</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">request</span></em><span class="sig-paren">)</span><a class="headerlink" href="#accounts.views.signup" title="Ссылка на это определение">¶</a></dt>
+<dd><p>Отображение страницы регистрации пользователя. Входные данные: запрос. Выходные: рендер страницы.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-accounts">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-accounts" title="Ссылка на этот заголовок">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Saved</a></h1>
+
+
+
+
+
+
+
+
+<h3>Навигация</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Быстрый поиск</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Искать" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2020, Zakharenko Danil.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/accounts.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
