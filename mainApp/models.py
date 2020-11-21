@@ -40,7 +40,7 @@ def get_upload_path(instance, filename):
 class Photo(models.Model):
     """Класс-модель фотография"""
     title = models.CharField(max_length=30)
-    description = models.CharField(max_length=100)
+    description = models.CharField(max_length=1000)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     image = models.ImageField(upload_to=get_upload_path)
     vk_id = models.IntegerField(null=True, blank=True)
