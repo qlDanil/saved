@@ -8,7 +8,7 @@ from .models import Photo, Hashtag
 from social_django.models import UserSocialAuth
 from django.db.models import Q
 from .tasks import upload
-
+from .ocr import getText
 
 @login_required
 def main_window(request):
@@ -72,6 +72,9 @@ def add_photo(request):
             image = form.cleaned_data['image']
             owner = request.user
             new_photo = Photo.objects.create(title=title, description=description, image=image, owner=owner)
+            new_photo.save()
+            description = description + "\nОптическое распознавание символов:\n" + getText(new_photo.image.url)
+            new_photo.description = description
             new_photo.save()
             hashtags = request.POST.getlist('hashtags[]')
             for hashtag in hashtags:
