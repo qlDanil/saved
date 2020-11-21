@@ -7,6 +7,7 @@ pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 
 
 def getText(image):
+    return image
     # загрузить образ и преобразовать его в оттенки серого
     image = cv2.imread(image)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
