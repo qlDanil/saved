@@ -8,7 +8,7 @@ pytesseract.pytesseract.tesseract_cmd = '/app/.apt/usr/bin/tesseract'
 
 def getText(image):
     # загрузить образ и преобразовать его в оттенки серого
-    path = 'https://' + os.environ.get("AWS_STORAGE_BUCKET_NAME") + '.s3.amazonaws.com/' + image
+    path = 'https://' + str(os.environ.get("AWS_STORAGE_BUCKET_NAME")) + '.s3.amazonaws.com' + str(image)
     image = cv2.imread(path)
     gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     blur = cv2.GaussianBlur(gray, (7, 7), 0)
