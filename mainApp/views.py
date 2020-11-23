@@ -73,8 +73,7 @@ def add_photo(request):
             owner = request.user
             new_photo = Photo.objects.create(title=title, description=description, image=image, owner=owner)
             new_photo.save()
-            description = description + "\n" + str(new_photo.image.url)
-            #description = description + "\nОптическое распознавание символов:\n" + getText(new_photo.image.url)
+            description = description + "\nОптическое распознавание символов:\n" + getText(new_photo.image.url)
             new_photo.description = description
             new_photo.save()
             hashtags = request.POST.getlist('hashtags[]')
