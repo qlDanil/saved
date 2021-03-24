@@ -1,6 +1,6 @@
 import cv2
 
-from yolov4.tflite import YOLOv4
+from .yolov4Data.yolov4.tflite import YOLOv4
 
 def getItems(url):
     yolo = YOLOv4()
