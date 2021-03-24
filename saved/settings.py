@@ -29,8 +29,6 @@ INSTALLED_APPS = [
     'social_django',
     'mainApp.apps.MainAppConfig',
     'accounts.apps.AccountsConfig',
-    'django_celery_beat',
-    'celery_progress',
 ]
 
 MIDDLEWARE = [
@@ -133,14 +131,14 @@ SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get("VK_OAUTH2_KEY", '7346377')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get("VK_OAUTH2_SECRET", 'LNLjEgOrBOeIu6cJQVYb')
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 
-CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL', "amqp://localhost")
-CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND', "rpc")
-CELERY_ACCEPT_CONTENT = ['application/json']
-CELERY_TASK_SERIALIZER = 'json'
-CELERY_RESULT_SERIALIZER = 'json'
-CELERY_TIMEZONE = 'Asia/Krasnoyarsk'
-CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
-CELERY_BROKER_POOL_LIMIT = 20
+# CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL', "amqp://localhost")
+# CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND', "rpc")
+# CELERY_ACCEPT_CONTENT = ['application/json']
+# CELERY_TASK_SERIALIZER = 'json'
+# CELERY_RESULT_SERIALIZER = 'json'
+# CELERY_TIMEZONE = 'Asia/Krasnoyarsk'
+# CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+# CELERY_BROKER_POOL_LIMIT = 20
 
 if not DEBUG:
     SOCIAL_AUTH_POSTGRES_JSONFIELD = True

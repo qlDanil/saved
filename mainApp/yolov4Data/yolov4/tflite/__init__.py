@@ -27,8 +27,8 @@ from typing import List
 import numpy as np
 
 try:
-    import tflite.interpreter as tflite
-    from tflite.interpreter import load_delegate
+    import tflite_runtime.interpreter as tflite
+    from tflite_runtime.interpreter import load_delegate
 except ModuleNotFoundError:
     import tensorflow.lite as tflite
 
