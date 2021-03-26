@@ -54,9 +54,9 @@ def upload(self, vk_token, owner_id, user_id):
                                                  vk_id=photo['id'], owner=User.objects.get(id=user_id))
                 new_photo.hashtags.add(hashtag_vk)
                 new_photo.save_photo_from_url(url)
-            except Exception:
+            except Exception as e:
                 new_photo.delete()
-                print('Произошла ошибка, файл пропущен.')
+                print('Произошла ошибка, файл пропущен.\n' + str(e))
                 failed += 1
                 continue
     time_for_dw = time.time() - time_now

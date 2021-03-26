@@ -31,5 +31,6 @@ def get_text(url):
         text = pytesseract.image_to_string(Image.open(filename))
         os.remove(filename)
         return text
-    except:
+    except Exception as e:
+        print(str(e))
         return "OCR Error"
