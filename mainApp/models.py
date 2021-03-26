@@ -2,6 +2,7 @@ import os
 from urllib.request import urlretrieve
 from django.contrib.auth.models import User
 from django.core.files import File
+from django.core.files.images import ImageFile
 from django.db import models
 from django.urls import reverse
 from django.utils import timezone
@@ -42,7 +43,7 @@ class Photo(models.Model):
     title = models.CharField(max_length=30)
     description = models.CharField(max_length=1000)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    image = models.ImageField(upload_to=get_upload_path)
+    image = models.ImageField(upload_to=get_upload_path, max_length=500)
     vk_id = models.IntegerField(null=True, blank=True)
     hashtags = models.ManyToManyField(Hashtag)
     date_time = models.DateTimeField(default=timezone.now)
@@ -61,7 +62,7 @@ class Photo(models.Model):
         result = urlretrieve(url)
         self.image.save(
             os.path.basename(url),
-            File(open(result[0], 'rb'))
+            ImageFile(file=open(result[0], 'rb'))
         )
         self.save()
 

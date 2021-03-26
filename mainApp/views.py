@@ -1,3 +1,4 @@
+import os
 import requests
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, Http404
@@ -8,8 +9,12 @@ from .models import Photo, Hashtag
 from social_django.models import UserSocialAuth
 from django.db.models import Q
 from .tasks import upload
-from .ocr import getText
-#from .yolo import getItems
+from .ocr import get_text
+
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+
+if DEBUG:
+    from .yolo import get_items
 
 
 @login_required
@@ -75,11 +80,13 @@ def add_photo(request):
             owner = request.user
             new_photo = Photo.objects.create(title=title, description=description, image=image, owner=owner)
             new_photo.save()
-            description = description + "\nОптическое распознавание символов:\n" + getText(new_photo.image.url)
-            #description = description + "\nНа картинке распознаны следующие объекты:\n" + str(getItems(new_photo.image.url))
+            description = description + "\nОптическое распознавание символов:\n" + get_text(new_photo.image.url)
             new_photo.description = description
             new_photo.save()
             hashtags = request.POST.getlist('hashtags[]')
+            if DEBUG:
+                hashtags.extend(get_items(new_photo.image.url))
+
             for hashtag in hashtags:
                 if not Hashtag.objects.filter(tag=hashtag).exists():
                     new_hashtag = Hashtag.objects.create(tag=hashtag)

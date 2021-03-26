@@ -48,12 +48,14 @@ def upload(self, vk_token, owner_id, user_id):
             print('Загружаю фото № {} из {}. Прогресс: {} %'.format(counter, photos_count, progress))
             progress_recorder.set_progress(counter, photos_count)
             progress = round(100 / photos_count * counter, 2)
+            new_photo = None
             try:
                 new_photo = Photo.objects.create(title='Фото_' + str(photo['id']), description=photo['text'],
                                                  vk_id=photo['id'], owner=User.objects.get(id=user_id))
                 new_photo.hashtags.add(hashtag_vk)
                 new_photo.save_photo_from_url(url)
             except Exception:
+                new_photo.delete()
                 print('Произошла ошибка, файл пропущен.')
                 failed += 1
                 continue
