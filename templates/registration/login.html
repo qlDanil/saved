@@ -26,9 +26,9 @@
                     <input type="submit" name="login" class="register" value="Войти">
                     <p><a href="{% url 'signup' %}">Не зарегистрированы?</a></p>
                     <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
-                    <p><a class="btn btn-primary text-white" href="/login/vk-oauth2" role="button">Войти с помощью
+                    <p><a class="btn btn-primary text-white" href="{% url "social:begin" "vk-oauth2" %}">Войти с помощью
                         <i class="fab fa-vk" data-toggle="tooltip"></i></a></p>
-                    <p><a class="btn btn-success text-white" href="/login/google-oauth2" role="button">Войти с помощью
+                    <p><a class="btn btn-success text-white" href="{% url "social:begin" "google-oauth2" %}">Войти с помощью
                         <i class="fab fa-google" data-toggle="tooltip"></i></a></p>
                     <p><a class="btn btn-primary text-white" href="{% url "social:begin" "facebook" %}" role="button">Войти с помощью
                         <i class="fab fa-facebook" data-toggle="tooltip"></i></a></p>

@@ -1,0 +1,23 @@
+{% extends "base_wrapper.html" %}
+{% load static %}
+
+{% block title %}
+    <title>Основная страница</title>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles_save_photo_progress.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid" style="padding-top: 20vh;">
+        <div class='progress-wrapper'>
+            <div id='progress-bar' class='progress-bar progress-bar-striped progress-bar-animated' style="background-color: #68a9ef; width: 0%;">&nbsp;</div>
+        </div>
+        <div id="progress-bar-message">Waiting for progress to start...</div>
+        <div id="celery-result"></div>
+        <input type="hidden" id="Url" data-url="{% url 'celery_progress:task_status' task_id %}"/>
+        <input type="hidden" id="SucUrl" data-url="{% url 'main_window' %}"/>
+    </div>
+    <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
+    <script src="{% static 'js/scripts_save_photo_progress.js' %}"></script>
+{% endblock %}

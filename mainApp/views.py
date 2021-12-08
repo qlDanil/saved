@@ -9,12 +9,9 @@ from .models import Photo, Hashtag
 from social_django.models import UserSocialAuth
 from django.db.models import Q
 from .tasks import upload
-from .ocr import get_text
+from .tasks import save_photo
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-
-if DEBUG:
-    from .yolo import get_items
 
 
 @login_required
@@ -22,7 +19,8 @@ def main_window(request):
     """Отображение главной страницы с фотографиями и хештегами. Входные данные: запрос. Выходные: рендер страницы."""
     hashtags = request.GET.get('hashtag', 'all')
     search = request.GET.get('search', 'all')
-    photos = Photo.objects.filter(owner=request.user)
+    photos = Photo.objects.filter(available=True)
+    photos = photos.filter(owner=request.user)
     if not search == 'all':
         photos = photos.filter(Q(description__icontains=search))
     if not hashtags == 'all':
@@ -71,30 +69,21 @@ def detail_photo(request, pk):
 def add_photo(request):
     """Отображение страницы с формой для добавления новой фотографии. Входные данные: запрос. Выходные: рендер
     страницы. """
+    global yolo_hashtags
     if request.method == 'POST':
         form = PhotoForm(request.POST, request.FILES)
         if form.is_valid():
             title = form.cleaned_data['title']
             description = form.cleaned_data['description']
             image = form.cleaned_data['image']
-            owner = request.user
-            new_photo = Photo.objects.create(title=title, description=description, image=image, owner=owner)
-            new_photo.save()
-            description = description + "\nОптическое распознавание символов:\n" + get_text(new_photo.image.url)
-            new_photo.description = description
-            new_photo.save()
             hashtags = request.POST.getlist('hashtags[]')
-            if DEBUG:
-                hashtags.extend(get_items(new_photo.image.url))
-
-            for hashtag in hashtags:
-                if not Hashtag.objects.filter(tag=hashtag).exists():
-                    new_hashtag = Hashtag.objects.create(tag=hashtag)
-                    new_hashtag.save()
-                hashtag_object = Hashtag.objects.get(tag=hashtag)
-                new_photo.hashtags.add(hashtag_object)
+            new_photo = Photo.objects.create(title=title, description=description, image=image, owner=request.user,
+                                             available=False)
             new_photo.save()
-            return HttpResponseRedirect(reverse('main_window'))
+            photo_id = new_photo.id
+            delay_hashtags = save_photo.delay(hashtags, photo_id)
+            return render(request, 'mainApp/save_photo_progress.html', context={'task_id': delay_hashtags.task_id})
+
     else:
         form = PhotoForm()
     return render(request, 'mainApp/add_photo.html', {'form': form})

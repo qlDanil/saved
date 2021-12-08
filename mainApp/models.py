@@ -1,7 +1,6 @@
 import os
 from urllib.request import urlretrieve
 from django.contrib.auth.models import User
-from django.core.files import File
 from django.core.files.images import ImageFile
 from django.db import models
 from django.urls import reverse
@@ -13,6 +12,7 @@ from django.dispatch import receiver
 
 class HashtagsManager(models.Manager):
     """Класс-менеджер для выбора случайного хештега"""
+
     def random(self):
         count = self.aggregate(count=Count('id'))['count']
         random_index = randint(0, count - 1)
@@ -47,6 +47,7 @@ class Photo(models.Model):
     vk_id = models.IntegerField(null=True, blank=True)
     hashtags = models.ManyToManyField(Hashtag)
     date_time = models.DateTimeField(default=timezone.now)
+    available = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["-date_time"]

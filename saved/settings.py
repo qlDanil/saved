@@ -135,15 +135,14 @@ SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get("VK_OAUTH2_KEY", '7985184')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get("VK_OAUTH2_SECRET", 'xBd8sADbZpJApHstS95Z')
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_OAUTH2_KEY", '340242678411-15ge0en00t4u5dabs6koqc4fih8v9q92.apps'
-                                                                    '.googleusercontent.com')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_OAUTH2_SECRET", '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')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_OAUTH2_KEY", '167702331805-1jgbkgisk2chf9gbln66ed71gr3gsgqj'
+                                                                    '.apps.googleusercontent.com')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_OAUTH2_SECRET", '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')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get("FACEBOOK_KEY", '610779900116077')
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET", '72d802f9274b3f28f05037a5ed2a145d')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get("FACEBOOK_KEY", '1010042689846860')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET", '4f25ea784b1e3010622aea496ea40fc1')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-SOCIAL_AUTH_FACEBOOK_API_VERSION = '2.11'
 
 CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL', "amqp://localhost")
 CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND', "rpc")

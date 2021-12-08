@@ -5,6 +5,12 @@ from celery import shared_task
 from django.contrib.auth.models import User
 from .models import Photo, Hashtag
 from celery_progress.backend import ProgressRecorder
+import os
+import cv2
+from yolov4.tflite import YOLOv4
+from .ocr import get_text
+
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 
 @shared_task(bind=True)
@@ -64,4 +70,40 @@ def upload(self, vk_token, owner_id, user_id):
         "\nВ очереди было {} файлов. Из них удачно загружено {} файлов, {} не удалось загрузить. {} Были загружены "
         "ранее. Затрачено времени: {} сек.".format(photos_count, photos_count - failed, failed, cached,
                                                    round(time_for_dw, 1)))
+    return True
+
+
+@shared_task(bind=True)
+def save_photo(self, hashtags, photo_id):
+    progress_recorder = ProgressRecorder(self)
+    new_photo = Photo.objects.get(id=photo_id)
+    new_photo.description = new_photo.description + "\nОптическое распознавание символов:\n" + get_text(new_photo.image.url)
+    if DEBUG:
+        url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+
+        yolo = YOLOv4()
+        yolo.config.parse_names("mainApp/yolov4Data/coco.names")
+        yolo.config.parse_cfg("mainApp/yolov4Data/yolov4-tiny.cfg")
+        yolo.load_tflite("mainApp/yolov4Data/yolov4-tiny-float16.tflite")
+
+        frame = cv2.imread(url)
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        progress_recorder.set_progress(50, 100)
+        bboxes = yolo.predict(frame_rgb, prob_thresh=0.25)
+        import time
+        time.sleep(5)
+        items = set()
+        for box in bboxes:
+            items.add(yolo.config.names[box[4]])
+        hashtags.extend(items)
+    progress_recorder.set_progress(50, 100)
+    for hashtag in hashtags:
+        if not Hashtag.objects.filter(tag=hashtag).exists():
+            new_hashtag = Hashtag.objects.create(tag=hashtag)
+            new_hashtag.save()
+        hashtag_object = Hashtag.objects.get(tag=hashtag)
+        new_photo.hashtags.add(hashtag_object)
+    new_photo.available = True
+    new_photo.save()
+    progress_recorder.set_progress(100, 100)
     return True

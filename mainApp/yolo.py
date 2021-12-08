@@ -14,7 +14,8 @@ def get_items(url):
     frame = cv2.imread(url)
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     bboxes = yolo.predict(frame_rgb, prob_thresh=0.25)
-
+    import time
+    time.sleep(30)
     items = set()
     for box in bboxes:
         items.add(yolo.config.names[box[4]])
