@@ -7,11 +7,12 @@ from .models import Photo, Hashtag
 from celery_progress.backend import ProgressRecorder
 import os
 import cv2
-from yolov4.tflite import YOLOv4
 from .ocr import get_text
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
+if DEBUG:
+    from yolov4.tflite import YOLOv4
 
 @shared_task(bind=True)
 def upload(self, vk_token, owner_id, user_id):

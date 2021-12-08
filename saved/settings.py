@@ -154,7 +154,7 @@ CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
 CELERY_BROKER_POOL_LIMIT = 20
 
 if not DEBUG:
-    SOCIAL_AUTH_POSTGRES_JSONFIELD = True
+    SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
     # Set S3 as the place to store your files.
     DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
