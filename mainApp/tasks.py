@@ -8,9 +8,11 @@ from celery_progress.backend import ProgressRecorder
 import os
 import cv2
 from .ocr import get_text
-from .caption import evaluate
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+if DEBUG:
+    from .caption import evaluate
+
 
 if DEBUG:
     from yolov4.tflite import YOLOv4
