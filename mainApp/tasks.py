@@ -8,11 +8,13 @@ from celery_progress.backend import ProgressRecorder
 import os
 import cv2
 from .ocr import get_text
+from .caption import evaluate
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 if DEBUG:
     from yolov4.tflite import YOLOv4
+
 
 @shared_task(bind=True)
 def upload(self, vk_token, owner_id, user_id):
@@ -78,10 +80,11 @@ def upload(self, vk_token, owner_id, user_id):
 def save_photo(self, hashtags, photo_id):
     progress_recorder = ProgressRecorder(self)
     new_photo = Photo.objects.get(id=photo_id)
-    new_photo.description = new_photo.description + "\nОптическое распознавание символов:\n" + get_text(new_photo.image.url)
+    new_photo.description = new_photo.description + " || Оптическое распознавание символов: " + get_text(
+        new_photo.image.url)
     if DEBUG:
         url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-
+        new_photo.description = new_photo.description + " || Генерация подписи: " + " ".join(evaluate(url)[:-1])
         yolo = YOLOv4()
         yolo.config.parse_names("mainApp/yolov4Data/coco.names")
         yolo.config.parse_cfg("mainApp/yolov4Data/yolov4-tiny.cfg")
@@ -91,8 +94,6 @@ def save_photo(self, hashtags, photo_id):
         frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         progress_recorder.set_progress(50, 100)
         bboxes = yolo.predict(frame_rgb, prob_thresh=0.25)
-        import time
-        time.sleep(5)
         items = set()
         for box in bboxes:
             items.add(yolo.config.names[box[4]])

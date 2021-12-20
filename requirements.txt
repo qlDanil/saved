@@ -40,3 +40,4 @@ social-auth-core==4.1.0
 sqlparse==0.3.1
 urllib3==1.26.7
 vk==2.0.2
+sendgrid==6.9.3

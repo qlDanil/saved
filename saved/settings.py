@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -75,9 +76,6 @@ DATABASES = {
     }
 }
 
-# Heroku: Update database configuration from $DATABASE_URL.
-import dj_database_url
-
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
 
@@ -122,7 +120,15 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 LOGIN_REDIRECT_URL = '/'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", 'saved.sup@gmail.com')
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD",
+                                     'SG.j08Gv_8ATEuZGx00Z7dX_A.1fua-_b-4E3jNRLBfDufL0gJfDf6LBPvZ3XW2SNK_B4')
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.vk.VKOAuth2',
@@ -134,6 +140,7 @@ AUTHENTICATION_BACKENDS = (
 SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get("VK_OAUTH2_KEY", '7985184')
 SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get("VK_OAUTH2_SECRET", 'xBd8sADbZpJApHstS95Z')
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
+SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.81'
 
 SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_OAUTH2_KEY", '167702331805-1jgbkgisk2chf9gbln66ed71gr3gsgqj'
                                                                     '.apps.googleusercontent.com')
