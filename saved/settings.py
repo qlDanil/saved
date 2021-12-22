@@ -7,11 +7,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '8n4$$^#4zx-djc((7&qy3&#qkbzl7u)mp1o1+7)rac6#!!qfr2')
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+
+if DEBUG:
+    from saved.variables import set_keys
+
+    set_keys()
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '')
 
 ALLOWED_HOSTS = [
     'saved-production.herokuapp.com',
@@ -121,12 +126,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 LOGIN_REDIRECT_URL = '/'
 
-DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", 'saved.sup@gmail.com')
+DEFAULT_FROM_EMAIL = os.environ.get("DEFAULT_FROM_EMAIL", '')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.sendgrid.net'
 EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD",
-                                     'SG.j08Gv_8ATEuZGx00Z7dX_A.1fua-_b-4E3jNRLBfDufL0gJfDf6LBPvZ3XW2SNK_B4')
+EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", '')
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
@@ -137,22 +141,21 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get("VK_OAUTH2_KEY", '7985184')
-SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get("VK_OAUTH2_SECRET", 'xBd8sADbZpJApHstS95Z')
+SOCIAL_AUTH_VK_OAUTH2_KEY = os.environ.get("VK_OAUTH2_KEY", '')
+SOCIAL_AUTH_VK_OAUTH2_SECRET = os.environ.get("VK_OAUTH2_SECRET", '')
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email', 'photos']
 SOCIAL_AUTH_VK_OAUTH2_API_VERSION = '5.81'
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_OAUTH2_KEY", '167702331805-1jgbkgisk2chf9gbln66ed71gr3gsgqj'
-                                                                    '.apps.googleusercontent.com')
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_OAUTH2_SECRET", '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')
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = os.environ.get("GOOGLE_OAUTH2_KEY", '')
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = os.environ.get("GOOGLE_OAUTH2_SECRET", '')
 SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 
-SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get("FACEBOOK_KEY", '1010042689846860')
-SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET", '4f25ea784b1e3010622aea496ea40fc1')
+SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get("FACEBOOK_KEY", '')
+SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get("FACEBOOK_SECRET", '')
 SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 
-CELERY_BROKER_URL = os.environ.get('CLOUDAMQP_URL', "amqp://localhost")
-CELERY_RESULT_BACKEND = os.environ.get('RESULT_BACKEND', "rpc")
+CELERY_BROKER_URL = os.environ.get("CLOUDAMQP_URL", '')
+CELERY_RESULT_BACKEND = os.environ.get("RESULT_BACKEND", '')
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
