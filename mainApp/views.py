@@ -10,6 +10,8 @@ from social_django.models import UserSocialAuth
 from django.db.models import Q
 from .tasks import upload
 from .tasks import save_photo
+import nltk
+nltk.download('punkt')
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
@@ -21,8 +23,17 @@ def main_window(request):
     search = request.GET.get('search', 'all')
     photos = Photo.objects.filter(available=True)
     photos = photos.filter(owner=request.user)
-    if not search == 'all':
-        photos = photos.filter(Q(description__icontains=search))
+    if not (search == 'all' or search == ''):
+        ps = nltk.stem.PorterStemmer()
+        words = nltk.tokenize.word_tokenize(search)
+        root_of_words = []
+        for word in words:
+            root_of_words.append(ps.stem(word))
+        queries = [Q(description__icontains=root) for root in root_of_words]
+        query = queries.pop()
+        for item in queries:
+            query |= item
+        photos = photos.filter(query)
     if not hashtags == 'all':
         hashtags = set(hashtags.split(' '))
         for hashtag in hashtags:

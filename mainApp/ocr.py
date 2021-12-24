@@ -6,7 +6,7 @@ from urllib.request import urlopen
 import numpy as np
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract' if DEBUG\
+pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract' if DEBUG \
     else r'/app/.apt/usr/bin/tesseract'
 
 
@@ -31,6 +31,5 @@ def get_text(url):
         text = pytesseract.image_to_string(Image.open(filename))
         os.remove(filename)
         return text
-    except Exception as e:
-        print(str(e))
+    except Exception:
         return "OCR Error"
