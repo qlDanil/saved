@@ -2,7 +2,7 @@
 <html lang="ru">
 {% load static %}
 <head>
-    <meta name="google-site-verification" content="6b6wQF6C-kSzrMgdtlOXp23kb5z_I1vluZ_4Z-gTY_M" />
+    <meta name="google-site-verification" content="6b6wQF6C-kSzrMgdtlOXp23kb5z_I1vluZ_4Z-gTY_M"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -25,10 +25,12 @@
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item"><a href="{% url 'main_window' %}" class="nav-link text-uppercase font-weight-bold">Home</a>
                 </li>
-                <li class="nav-item"><a href="{% url 'add_photo' %}" class="nav-link text-uppercase font-weight-bold">Добавить
-                    фото</a></li>
-                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link text-uppercase font-weight-bold">О нас</a></li>
-                <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link text-uppercase font-weight-bold">Контакты</a></li>
+                <li class="nav-item"><a href="{% url 'add_photo' %}" class="nav-link text-uppercase font-weight-bold">Add
+                    photo</a></li>
+                <li class="nav-item"><a href="{% url 'about' %}" class="nav-link text-uppercase font-weight-bold">About
+                    us</a></li>
+                <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link text-uppercase font-weight-bold">Contacts</a>
+                </li>
             </ul>
         </div>
         <div class="mx-auto order-0">
@@ -45,13 +47,13 @@
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                     <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link text-uppercase font-weight-bold">
-                        <i class="fas fa-sign-out-alt"></i> Выйти</a></li>
+                        <i class="fas fa-sign-out-alt"></i> Log out</a></li>
                     <li class="nav-item"><a href="{% url 'profile' %}" class="nav-link text-uppercase font-weight-bold">
                         <i class="fas fa-user-alt"></i> {{ user.get_username }}</a></li>
                 {% else %}
                     <li class="nav-item"><a href="{% url 'login' %}?next={% url 'main_window' %}"
                                             class="nav-link text-uppercase font-weight-bold">
-                        <i class="fas fa-sign-in-alt"></i> Войти</a></li>
+                        <i class="fas fa-sign-in-alt"></i> Log in</a></li>
                 {% endif %}
             </ul>
         </div>
@@ -66,7 +68,7 @@
         <hr>
         <div class="row d-flex align-items-center">
             <div class="col-md-7 col-lg-8">
-                <p class="text-center text-md-left">&copy saved.ru, 2020 | Все права защищены </p>
+                <p class="text-center text-md-left">&copy saved.ru, 2020 | All rights reserved </p>
             </div>
             <div class="col-md-5 col-lg-4 ml-lg-0">
                 <div class="text-center text-md-right">
@@ -82,7 +84,7 @@
                             </a>
                         </li>
                         <li class="list-inline-item">
-                            <a class="btn-sm mx-1" href="https://vk.com/qldanil" target="_blank">
+                            <a class="btn-sm mx-1" href="https://vk.com/falcone0" target="_blank">
                                 <i class="fab fa-vk"></i>
                             </a>
                         </li>

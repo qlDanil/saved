@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Успешная регистрация</title>
+    <title>Sign up failed</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
@@ -11,6 +11,6 @@
 
 {% block content %}
     <div class="page-content">
-        <h5>Некорректная ссылка активации! <a href="{% url 'signup' %}">Нажмите для регистрации.</a></h5>
+        <h5>Incorrect activation link! <a href="{% url 'signup' %}">Click to register.</a></h5>
     </div>
 {% endblock %}

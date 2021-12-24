@@ -1,6 +1,6 @@
 function customResult(resultElement, result) {
     $(resultElement).append(
-        $('<p>').text('Процесс сохранения завершен')
+        $('<p>').text('Save process completed')
     );
 }
 

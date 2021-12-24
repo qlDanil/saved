@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Основная страница</title>
+    <title>Profile page</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_profile.css' %}">
 {% endblock %}
@@ -10,10 +10,8 @@
 {% block content %}
     <div class="container-fluid" style="padding-top: 20vh;">
         <div class="container">
-            <div>
-                <a class="a2" href={% url 'photo_import' %}> Импортировать сохраненные фотографии <span
-                        style="color:#0099CC;">Вконтакте</span></a>
-            </div>
+            <a class="btn btn-primary text-white mt-sm-1" href="{% url 'photo_import' %}"
+               role="button">Import saved photos from <i class="fab fa-vk" data-toggle="tooltip"></i></a>
         </div>
     </div>
     <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>

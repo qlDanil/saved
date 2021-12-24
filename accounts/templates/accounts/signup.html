@@ -3,7 +3,7 @@
 {% load trans from i18n %}
 
 {% block title %}
-    <title>Регистрация</title>
+    <title>Registration</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
@@ -15,36 +15,40 @@
         <div class="form-v7-content">
             <div class="form-left">
                 <img src="{% static 'images/pin-up-girl.jpg' %}" alt="form">
-                <p class="text-1">Регистрация</p>
+                <p class="text-1">Registration</p>
                 <p class="text-2">Privacy policy & Terms of service</p>
             </div>
             <form class="form-detail" action="{% url 'signup' %}" method="post">
                 {% csrf_token %}
                 <div class="form-row">
-                    <label for="first_name">Имя</label>
+                    <label for="first_name">Name</label>
                     <input type="text" name="first_name" id="first_name" class="input-text form-control">
                 </div>
                 <div class="form-row">
-                    <label for="username">Логин</label>
+                    <label for="username">Login</label>
                     <input type="text" name="username" id="username" class="input-text form-control" required>
                 </div>
                 <div class="form-row">
-                    <label for="your_email">e-mail</label>
+                    <label for="your_email">E-mail</label>
                     <input type="email" name="email" id="email" class="input-text form-control" required>
                 </div>
                 <div class="form-row">
-                    <label for="password">Пароль</label>
+                    <label for="password">Password</label>
                     <input type="password" name="password1" id="pwd1" class="input-text form-control" required>
                 </div>
                 <div class="form-row">
-                    <label for="confirm_password">Подтверждение пароля</label>
+                    <label for="confirm_password">Confirm password</label>
                     <input type="password" name="password2" id="pwd2" class="input-text form-control" required>
                 </div>
                 <div class="form-row-last">
-                    <input type="submit" name="register" class="register" value="Зарегистрироваться">
-                    <p>Или<a href="{% url 'login' %}">Авторизоваться</a></p>
-                    <a class="btn btn-primary text-white mt-sm-3" href="/login/vk-oauth2" role="button">Войти с помощью
-                        <i class="fab fa-vk" data-toggle="tooltip"></i></a>
+                    <input type="submit" name="register" class="register" value="Sign up">
+                    <p>Or<a href="{% url 'login' %}">Log in</a></p>
+                    <p><a class="btn btn-primary text-white mt-sm-1" href="{% url "social:begin" "vk-oauth2" %}"
+                       role="button">Sign up with <i class="fab fa-vk" data-toggle="tooltip"></i></a>
+                    <a class="btn btn-success text-white mt-sm-1" href="{% url "social:begin" "google-oauth2" %}"
+                       role="button">Sign up with <i class="fab fa-google" data-toggle="tooltip"></i></a>
+                    <a class="btn btn-primary text-white mt-sm-1" href="{% url "social:begin" "facebook" %}"
+                       role="button">Sign up with <i class="fab fa-facebook" data-toggle="tooltip"></i></a></p>
                 </div>
             </form>
             <div aria-live="polite" aria-atomic="true">

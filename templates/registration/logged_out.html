@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Выход из учетной записи</title>
+    <title>Logged out of your account</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
@@ -11,6 +11,6 @@
 
 {% block content %}
     <div class="page-content">
-        <h5>Вы вышли из учетной записи. <a href="{% url 'login' %}">Авторизоваться снова?.</a></h5>
+        <h5>You are logged out of your account. <a href="{% url 'login' %}">Log in again?</a></h5>
     </div>
 {% endblock %}

@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Авторизация</title>
+    <title>Authorization</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
@@ -15,25 +15,25 @@
             <form class="form-detail" action="{% url 'login' %}" method="post">
                 {% csrf_token %}
                 <div class="form-row">
-                    <label for="username">Логин</label>
+                    <label for="username">Login</label>
                     <div class="input-text">{{ form.username }}</div>
                 </div>
                 <div class="form-row">
-                    <label for="password">Пароль</label>
+                    <label for="password">Password</label>
                     <div class="input-text">{{ form.password }}</div>
                 </div>
                 <div class="form-row-last">
-                    <input type="submit" name="login" class="register" value="Войти">
-                    <p><a href="{% url 'signup' %}">Не зарегистрированы?</a></p>
-                    <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
-                    <p><a class="btn btn-primary text-white" href="{% url "social:begin" "vk-oauth2" %}">Войти с помощью
-                        <i class="fab fa-vk" data-toggle="tooltip"></i></a></p>
-                    <p><a class="btn btn-success text-white" href="{% url "social:begin" "google-oauth2" %}">Войти с помощью
-                        <i class="fab fa-google" data-toggle="tooltip"></i></a></p>
-                    <p><a class="btn btn-primary text-white" href="{% url "social:begin" "facebook" %}" role="button">Войти с помощью
-                        <i class="fab fa-facebook" data-toggle="tooltip"></i></a></p>
+                    <input type="submit" name="login" class="register" value="Log in">
+                    <p><a href="{% url 'signup' %}">Not registered?</a></p>
+                    <p><a href="{% url 'password_reset' %}">Forgot password?</a></p>
+                    <p><a class="btn btn-primary text-white mt-sm-1" href="{% url "social:begin" "vk-oauth2" %}"
+                          role="button">Log in with <i class="fab fa-vk" data-toggle="tooltip"></i></a>
+                        <a class="btn btn-success text-white mt-sm-1" href="{% url "social:begin" "google-oauth2" %}"
+                           role="button">Log in with <i class="fab fa-google" data-toggle="tooltip"></i></a>
+                        <a class="btn btn-primary text-white mt-sm-1" href="{% url "social:begin" "facebook" %}"
+                           role="button">Log in with <i class="fab fa-facebook" data-toggle="tooltip"></i></a></p>
                     {% if form.errors %}
-                        <p class="text-danger">Ваш пароль и логин не подходят. Попробуйте снова.</p>
+                        <p class="text-danger">Your password and login do not match. Try it again.</p>
                     {% endif %}
                 </div>
                 <input type="hidden" name="next" value="{{ next }}"/>

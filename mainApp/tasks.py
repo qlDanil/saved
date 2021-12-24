@@ -21,10 +21,10 @@ if DEBUG:
 @shared_task(bind=True)
 def upload(self, vk_token, owner_id, user_id):
     """Процесс импорта фотографий из Вконтакте для ассинхронного выполнения"""
-    if not Hashtag.objects.filter(tag='ВК').exists():
-        new_hashtag = Hashtag.objects.create(tag='ВК')
+    if not Hashtag.objects.filter(tag='VK').exists():
+        new_hashtag = Hashtag.objects.create(tag='VK')
         new_hashtag.save()
-    hashtag_vk = Hashtag.objects.get(tag='ВК')
+    hashtag_vk = Hashtag.objects.get(tag='VK')
     progress_recorder = ProgressRecorder(self)
     vk_api = vk.API(vk.Session(access_token=vk_token))
     album_id = -15
@@ -61,7 +61,7 @@ def upload(self, vk_token, owner_id, user_id):
             progress = round(100 / photos_count * counter, 2)
             new_photo = None
             try:
-                new_photo = Photo.objects.create(title='Фото_' + str(photo['id']), description=photo['text'],
+                new_photo = Photo.objects.create(title='Photo_' + str(photo['id']), description=photo['text'],
                                                  vk_id=photo['id'], owner=User.objects.get(id=user_id))
                 new_photo.hashtags.add(hashtag_vk)
                 new_photo.save_photo_from_url(url)
@@ -82,11 +82,12 @@ def upload(self, vk_token, owner_id, user_id):
 def save_photo(self, hashtags, photo_id):
     progress_recorder = ProgressRecorder(self)
     new_photo = Photo.objects.get(id=photo_id)
-    new_photo.description = new_photo.description + " || Оптическое распознавание символов: " + get_text(
+    new_photo.description = new_photo.description + " || Optical character recognition: " + get_text(
         new_photo.image.url)
+    progress_recorder.set_progress(25, 100)
     if DEBUG:
         url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-        new_photo.description = new_photo.description + " || Генерация подписи: " + " ".join(evaluate(url)[:-1])
+        new_photo.description = new_photo.description + " || Image captioning: " + " ".join(evaluate(url)[:-1])
         yolo = YOLOv4()
         yolo.config.parse_names("mainApp/yolov4Data/coco.names")
         yolo.config.parse_cfg("mainApp/yolov4Data/yolov4-tiny.cfg")
@@ -100,7 +101,8 @@ def save_photo(self, hashtags, photo_id):
         for box in bboxes:
             items.add(yolo.config.names[box[4]])
         hashtags.extend(items)
-    progress_recorder.set_progress(50, 100)
+        progress_recorder.set_progress(75, 100)
+    progress_recorder.set_progress(75, 100)
     for hashtag in hashtags:
         if not Hashtag.objects.filter(tag=hashtag).exists():
             new_hashtag = Hashtag.objects.create(tag=hashtag)

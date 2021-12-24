@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Успешная регистрация</title>
+    <title>Sign up success</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_auth.css' %}">
     <link rel="stylesheet" href="{% static 'css/opensans-font.css' %}">
@@ -11,7 +11,7 @@
 
 {% block content %}
     <div class="page-content">
-        <h5>Спасибо за подтверждение почты! Теперь вы можете авторизоваться. <a href="{% url 'login' %}">Нажмите для
-            авторизации.</a></h5>
+        <h5>Thank you for confirming your mail! Now you can log in. <a href="{% url 'login' %}">Click to log in.</a>
+        </h5>
     </div>
 {% endblock %}

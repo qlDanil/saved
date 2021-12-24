@@ -105,13 +105,13 @@ class AddItemForm extends React.Component {
             React.createElement("input", {
                 type: "text",
                 id: "hashtagItem",
-                placeholder: "Новый хештег",
+                placeholder: "new hashtag",
                 ref: "hashtagName",
                 className: "form-control"
             }))), React.createElement("button", {
             type: "submit",
             className: "btn ml-1"
-        }, "Добавить"));
+        }, "Add"));
     }
 
 }

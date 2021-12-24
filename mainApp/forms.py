@@ -7,12 +7,12 @@ class PhotoForm(forms.ModelForm):
     class Meta:
         model = Photo
         fields = ['title', 'description', 'image', ]
-        labels = {'title': 'Название', 'description': 'Описание', 'image': 'Картинка', }
+        labels = {'title': 'Title', 'description': 'Description', 'image': 'Image', }
         widgets = {
             'title': forms.widgets.Input(
-                attrs={'class': 'form-control', 'placeholder': 'Название'}),
+                attrs={'class': 'form-control', 'placeholder': 'image name'}),
             'description': forms.Textarea(
-                attrs={'class': 'form-control', 'placeholder': 'Описание картинки'}),
+                attrs={'class': 'form-control', 'placeholder': 'info about image'}),
             'image': forms.widgets.FileInput(
                 attrs={'class': 'form-image', 'accept': 'image/*'}
             )

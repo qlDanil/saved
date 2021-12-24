@@ -32,4 +32,4 @@ def get_text(url):
         os.remove(filename)
         return text
     except Exception:
-        return "OCR Error"
+        return "no text"

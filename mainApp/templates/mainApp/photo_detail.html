@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-    <title>Основная страница</title>
+    <title>Main page</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{% static 'css/styles_photo_detail.css' %}">
 {% endblock %}
@@ -20,7 +20,7 @@
                         <p class="el title">{{ photo.title }}</p>
                             <div class="row el">
                                 <div class="col-lg-10 col-md-10 col-sm-10 input-group-prepend tags">
-                                    <p style="color: black;">Ключевые слова:</p>
+                                    <p style="color: black;">Hashtags:</p>
                                     {% for hashtag in photo.hashtags.all %}
                                         <pre> </pre>
                                         <a href="/?search={{ hashtag.tag|urlencode }}" class="tag">{{ hashtag.tag }}</a>
@@ -29,25 +29,25 @@
                                 </div>
                         </div>
                         <p class="el discr">{{ photo.description }}</p>
-                        <a class="btn btn-primary el" href="{% url 'edit_photo' pk=photo.id %}">Редактировать</a>
+                        <a class="btn btn-primary el" href="{% url 'edit_photo' pk=photo.id %}">Edit</a>
                         <button type="button" class="btn btn-primary el" data-toggle="modal"
-                                data-target="#deleteModal">Удалить
+                                data-target="#deleteModal">Delete
                         </button>
                         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
                              aria-labelledby="deleteModalTitle" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="deleteModalLongTitle">Подтвердите удаление</h5>
+                                        <h5 class="modal-title" id="deleteModalLongTitle">Confirm deletion</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel
                                         </button>
                                         <a class="btn btn-danger"
-                                           href="{% url 'photo_delete' pk=photo.id %}">Удалить</a>
+                                           href="{% url 'photo_delete' pk=photo.id %}">Delete</a>
                                     </div>
                                 </div>
                             </div>

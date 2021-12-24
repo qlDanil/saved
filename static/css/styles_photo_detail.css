@@ -12,8 +12,6 @@
 }
 
 .pic .meadow {
-    /*border-left: 4px solid #682a68;
-    border-radius: 4px;*/
     height: 100%;
     background: radial-gradient(circle, rgba(199, 199, 199, 0.39) 0%, rgba(223, 223, 223, 0.39) 100%);
 }
