@@ -21,14 +21,26 @@ if DEBUG:
 @shared_task(bind=True)
 def upload(self, vk_token, owner_id, user_id):
     """Процесс импорта фотографий из Вконтакте для ассинхронного выполнения"""
+    if DEBUG:
+        yolo = YOLOv4()
+        yolo.config.parse_names("mainApp/yolov4Data/coco.names")
+        yolo.config.parse_cfg("mainApp/yolov4Data/yolov4-tiny.cfg")
+        yolo.load_tflite("mainApp/yolov4Data/yolov4-tiny-float16.tflite")
+
     if not Hashtag.objects.filter(tag='VK').exists():
         new_hashtag = Hashtag.objects.create(tag='VK')
         new_hashtag.save()
     hashtag_vk = Hashtag.objects.get(tag='VK')
     progress_recorder = ProgressRecorder(self)
-    vk_api = vk.API(vk.Session(access_token=vk_token))
+    try:
+        vk_api = vk.API(vk.Session(access_token=vk_token))
+    except Exception as e:
+        print(e.msg)
     album_id = -15
-    photos_count = vk_api.photos.getAlbums(owner_id=owner_id, album_ids=album_id, v='5.30')['items'][0]['size']
+    try:
+        photos_count = vk_api.photos.getAlbums(owner_id=owner_id, album_ids=album_id, v='5.81')['items'][0]['size']
+    except Exception as e:
+        print(e.msg)
     counter = 0
     progress = 0
     failed = 0
@@ -36,26 +48,13 @@ def upload(self, vk_token, owner_id, user_id):
     time_now = time.time()
 
     for j in range(math.ceil(photos_count / 1000)):
-        photos = vk_api.photos.get(owner_id=owner_id, album_id=album_id, count=1000, offset=j * 1000, v='5.30')['items']
+        photos = vk_api.photos.get(owner_id=owner_id, album_id=album_id, count=1000, offset=j * 1000, v='5.81')['items']
         for photo in photos:
             counter += 1
             if {'vk_id': photo['id']} in Photo.objects.filter(owner=User.objects.get(id=user_id)).values('vk_id'):
                 cached += 1
                 continue
-            if 'photo_2560' in photo:
-                url = photo['photo_2560']
-            elif 'photo_2560' in photo:
-                url = photo['photo_1280']
-            elif 'photo_807' in photo:
-                url = photo['photo_807']
-            elif 'photo_604' in photo:
-                url = photo['photo_604']
-            elif 'photo_130' in photo:
-                url = photo['photo_130']
-            elif 'photo_75' in photo:
-                url = photo['photo_75']
-            else:
-                url = None
+            url = photo['sizes'][-1]['url']
             print('Загружаю фото № {} из {}. Прогресс: {} %'.format(counter, photos_count, progress))
             progress_recorder.set_progress(counter, photos_count)
             progress = round(100 / photos_count * counter, 2)
@@ -70,6 +69,26 @@ def upload(self, vk_token, owner_id, user_id):
                 print('Произошла ошибка, файл пропущен.\n' + str(e))
                 failed += 1
                 continue
+            new_photo.description = new_photo.description + " || Optical character recognition: " + get_text(
+                new_photo.image.url)
+            if DEBUG:
+                url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+                new_photo.description = new_photo.description + " || Image captioning: " + " ".join(evaluate(url)[:-1])
+
+                frame = cv2.imread(url)
+                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+                bboxes = yolo.predict(frame_rgb, prob_thresh=0.25)
+                items = set()
+                for box in bboxes:
+                    items.add(yolo.config.names[box[4]])
+                for hashtag in items:
+                    if not Hashtag.objects.filter(tag=hashtag).exists():
+                        new_hashtag = Hashtag.objects.create(tag=hashtag)
+                        new_hashtag.save()
+                    hashtag_object = Hashtag.objects.get(tag=hashtag)
+                    new_photo.hashtags.add(hashtag_object)
+                new_photo.available = True
+                new_photo.save()
     time_for_dw = time.time() - time_now
     print(
         "\nВ очереди было {} файлов. Из них удачно загружено {} файлов, {} не удалось загрузить. {} Были загружены "

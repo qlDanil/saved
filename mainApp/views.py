@@ -11,6 +11,7 @@ from django.db.models import Q
 from .tasks import upload
 from .tasks import save_photo
 import nltk
+
 nltk.download('punkt')
 
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
@@ -150,22 +151,20 @@ def contact(request):
 def photo_import(request):
     """Отображение страницы в момент импорта фотографий из Вконтакте. Входные данные: запрос. Выходные: рендер
     страницы. """
-    vk_user = None
+    if DEBUG:
+        redirect_uri = 'http://127.0.0.1:8000/photo_import'
+    else:
+        redirect_uri = 'http://saved-production.herokuapp.com/photo_import'
     if 'state' not in request.GET:
-        if len(UserSocialAuth.objects.filter(user=request.user, provider='vk-oauth2')) <= 0:
-            return HttpResponseRedirect(
-                'https://oauth.vk.com/authorize?client_id=7346377&display=page&redirect_uri=http://saved-production'
-                '.herokuapp.com/photo_import&scope=photos&response_type=code&v=5.103&state=1')
-        vk_user = UserSocialAuth.objects.get(user=request.user, provider='vk-oauth2')
+        return HttpResponseRedirect(
+            'https://oauth.vk.com/authorize?client_id=7346377&display=page&redirect_uri=' + redirect_uri
+            + '&scope=photos&response_type=code&v=5.81&state=1')
     elif request.GET['state'] == '1':
         response = requests.get(
-            'https://oauth.vk.com/access_token?client_id=7346377&client_secret=LNLjEgOrBOeIu6cJQVYb&redirect_uri=http'
-            '://saved-production.herokuapp.com/photo_import&code=' + request.GET['code'] + '&state=2')
-        UserSocialAuth.create_social_auth(user=request.user, uid=response.json()['user_id'], provider='vk-oauth2')
-        vk_user = UserSocialAuth.objects.get(user=request.user, provider='vk-oauth2')
-        vk_user.set_extra_data({'access_token': response.json()['access_token']})
-    imports = upload.delay(vk_user.access_token, vk_user.uid, request.user.id)
-    return render(request, 'mainApp/photo_import.html', context={'task_id': imports.task_id})
+            'https://oauth.vk.com/access_token?client_id=7346377&client_secret=LNLjEgOrBOeIu6cJQVYb&redirect_uri='
+            + redirect_uri + '&code=' + request.GET['code'] + '&state=2')
+        imports = upload.delay(response.json()['access_token'], response.json()['user_id'], request.user.id)
+        return render(request, 'mainApp/photo_import.html', context={'task_id': imports.task_id})
 
 
 @login_required
