@@ -8,25 +8,14 @@ from celery_progress.backend import ProgressRecorder
 import os
 import cv2
 from .ocr import get_text
+import requests
 
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
-if DEBUG:
-    from .caption import evaluate
-
-
-if DEBUG:
-    from yolov4.tflite import YOLOv4
+rest_api_address = os.environ.get('REST_API_ADDRESS')
 
 
 @shared_task(bind=True)
 def upload(self, vk_token, owner_id, user_id):
     """Процесс импорта фотографий из Вконтакте для ассинхронного выполнения"""
-    if DEBUG:
-        yolo = YOLOv4()
-        yolo.config.parse_names("mainApp/yolov4Data/coco.names")
-        yolo.config.parse_cfg("mainApp/yolov4Data/yolov4-tiny.cfg")
-        yolo.load_tflite("mainApp/yolov4Data/yolov4-tiny-float16.tflite")
-
     if not Hashtag.objects.filter(tag='VK').exists():
         new_hashtag = Hashtag.objects.create(tag='VK')
         new_hashtag.save()
@@ -71,24 +60,25 @@ def upload(self, vk_token, owner_id, user_id):
                 continue
             new_photo.description = new_photo.description + " || Optical character recognition: " + get_text(
                 new_photo.image.url)
-            if DEBUG:
-                url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-                new_photo.description = new_photo.description + " || Image captioning: " + " ".join(evaluate(url)[:-1])
 
-                frame = cv2.imread(url)
-                frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-                bboxes = yolo.predict(frame_rgb, prob_thresh=0.25)
-                items = set()
-                for box in bboxes:
-                    items.add(yolo.config.names[box[4]])
-                for hashtag in items:
-                    if not Hashtag.objects.filter(tag=hashtag).exists():
-                        new_hashtag = Hashtag.objects.create(tag=hashtag)
-                        new_hashtag.save()
-                    hashtag_object = Hashtag.objects.get(tag=hashtag)
-                    new_photo.hashtags.add(hashtag_object)
-                new_photo.available = True
-                new_photo.save()
+            url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+            files = {'upload_file': open(url, 'rb')}
+            values_yolo = {'id': '1'}
+            values_caption = {'id': '2'}
+            r1 = requests.post(rest_api_address, files=files, data=values_yolo)
+            print(r1.text)
+            r2 = requests.post(rest_api_address, files=files, data=values_caption)
+            print(r2.text)
+            new_photo.description = new_photo.description + " || Image captioning: " + " ".join('todo')
+
+            for hashtag in []:
+                if not Hashtag.objects.filter(tag=hashtag).exists():
+                    new_hashtag = Hashtag.objects.create(tag=hashtag)
+                    new_hashtag.save()
+                hashtag_object = Hashtag.objects.get(tag=hashtag)
+                new_photo.hashtags.add(hashtag_object)
+            new_photo.available = True
+            new_photo.save()
     time_for_dw = time.time() - time_now
     print(
         "\nВ очереди было {} файлов. Из них удачно загружено {} файлов, {} не удалось загрузить. {} Были загружены "
@@ -104,25 +94,15 @@ def save_photo(self, hashtags, photo_id):
     new_photo.description = new_photo.description + " || Optical character recognition: " + get_text(
         new_photo.image.url)
     progress_recorder.set_progress(25, 100)
-    if DEBUG:
-        url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-        new_photo.description = new_photo.description + " || Image captioning: " + " ".join(evaluate(url)[:-1])
-        yolo = YOLOv4()
-        yolo.config.parse_names("mainApp/yolov4Data/coco.names")
-        yolo.config.parse_cfg("mainApp/yolov4Data/yolov4-tiny.cfg")
-        yolo.load_tflite("mainApp/yolov4Data/yolov4-tiny-float16.tflite")
 
-        frame = cv2.imread(url)
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        progress_recorder.set_progress(50, 100)
-        bboxes = yolo.predict(frame_rgb, prob_thresh=0.25)
-        items = set()
-        for box in bboxes:
-            items.add(yolo.config.names[box[4]])
-        hashtags.extend(items)
-        progress_recorder.set_progress(75, 100)
+    url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+    files = {'file': open(url, 'rb')}
+    items = requests.post(rest_api_address + '/1', files=files)
+    caption = requests.post(rest_api_address + '/2', files=files)
+    new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
+
     progress_recorder.set_progress(75, 100)
-    for hashtag in hashtags:
+    for hashtag in items:
         if not Hashtag.objects.filter(tag=hashtag).exists():
             new_hashtag = Hashtag.objects.create(tag=hashtag)
             new_hashtag.save()
