@@ -84,8 +84,8 @@ def upload(self, vk_token, owner_id, user_id):
                         new_hashtag.save()
                     hashtag_object = Hashtag.objects.get(tag=hashtag)
                     new_photo.hashtags.add(hashtag_object)
-                new_photo.available = True
-                new_photo.save()
+            new_photo.available = True
+            new_photo.save()
 
     time_for_dw = time.time() - time_now
     print(
@@ -118,10 +118,9 @@ def save_photo(self, hashtags, photo_id):
                 new_hashtag.save()
             hashtag_object = Hashtag.objects.get(tag=hashtag)
             new_photo.hashtags.add(hashtag_object)
-        new_photo.available = True
-        new_photo.save()
     else:
-        new_photo.description = new_photo.description + "НЕТ СОЕДИНЕНИЯ"
-        new_photo.save()
+        new_photo.description = new_photo.description + " НЕТ СОЕДИНЕНИЯ"
+    new_photo.available = True
+    new_photo.save()
     progress_recorder.set_progress(100, 100)
     return True
