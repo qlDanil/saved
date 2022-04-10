@@ -6,11 +6,20 @@ from django.contrib.auth.models import User
 from .models import Photo, Hashtag
 from celery_progress.backend import ProgressRecorder
 import os
-import cv2
 from .ocr import get_text
 import requests
+from urllib.request import urlopen
+from urllib.error import URLError
 
 rest_api_address = os.environ.get('REST_API_ADDRESS')
+
+
+def is_rest_api_work():
+    try:
+        urlopen(rest_api_address, timeout=20)
+        return True
+    except URLError as err:
+        return False
 
 
 @shared_task(bind=True)
@@ -60,25 +69,24 @@ def upload(self, vk_token, owner_id, user_id):
                 continue
             new_photo.description = new_photo.description + " || Optical character recognition: " + get_text(
                 new_photo.image.url)
-
-            url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-            files = {'upload_file': open(url, 'rb')}
-            values_yolo = {'id': '1'}
-            values_caption = {'id': '2'}
-            r1 = requests.post(rest_api_address, files=files, data=values_yolo)
-            print(r1.text)
-            r2 = requests.post(rest_api_address, files=files, data=values_caption)
-            print(r2.text)
-            new_photo.description = new_photo.description + " || Image captioning: " + " ".join('todo')
-
-            for hashtag in []:
-                if not Hashtag.objects.filter(tag=hashtag).exists():
-                    new_hashtag = Hashtag.objects.create(tag=hashtag)
-                    new_hashtag.save()
-                hashtag_object = Hashtag.objects.get(tag=hashtag)
-                new_photo.hashtags.add(hashtag_object)
-            new_photo.available = True
             new_photo.save()
+
+            if is_rest_api_work:
+                url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+                files = {'file': open(url, 'rb')}
+                hashtags = requests.post(rest_api_address + '/1', files=files)
+                caption = requests.post(rest_api_address + '/2', files=files)
+                new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
+
+                for hashtag in hashtags:
+                    if not Hashtag.objects.filter(tag=hashtag).exists():
+                        new_hashtag = Hashtag.objects.create(tag=hashtag)
+                        new_hashtag.save()
+                    hashtag_object = Hashtag.objects.get(tag=hashtag)
+                    new_photo.hashtags.add(hashtag_object)
+                new_photo.available = True
+                new_photo.save()
+
     time_for_dw = time.time() - time_now
     print(
         "\nВ очереди было {} файлов. Из них удачно загружено {} файлов, {} не удалось загрузить. {} Были загружены "
@@ -93,22 +101,27 @@ def save_photo(self, hashtags, photo_id):
     new_photo = Photo.objects.get(id=photo_id)
     new_photo.description = new_photo.description + " || Optical character recognition: " + get_text(
         new_photo.image.url)
+    new_photo.save()
     progress_recorder.set_progress(25, 100)
 
-    url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-    files = {'file': open(url, 'rb')}
-    items = requests.post(rest_api_address + '/1', files=files)
-    caption = requests.post(rest_api_address + '/2', files=files)
-    new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
+    if is_rest_api_work:
+        url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+        files = {'file': open(url, 'rb')}
+        hashtags = requests.post(rest_api_address + '/1', files=files)
+        caption = requests.post(rest_api_address + '/2', files=files)
+        new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
 
-    progress_recorder.set_progress(75, 100)
-    for hashtag in items:
-        if not Hashtag.objects.filter(tag=hashtag).exists():
-            new_hashtag = Hashtag.objects.create(tag=hashtag)
-            new_hashtag.save()
-        hashtag_object = Hashtag.objects.get(tag=hashtag)
-        new_photo.hashtags.add(hashtag_object)
-    new_photo.available = True
-    new_photo.save()
+        progress_recorder.set_progress(75, 100)
+        for hashtag in hashtags:
+            if not Hashtag.objects.filter(tag=hashtag).exists():
+                new_hashtag = Hashtag.objects.create(tag=hashtag)
+                new_hashtag.save()
+            hashtag_object = Hashtag.objects.get(tag=hashtag)
+            new_photo.hashtags.add(hashtag_object)
+        new_photo.available = True
+        new_photo.save()
+    else:
+        new_photo.description = new_photo.description + "НЕТ СОЕДИНЕНИЯ"
+        new_photo.save()
     progress_recorder.set_progress(100, 100)
     return True
