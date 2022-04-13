@@ -8,7 +8,7 @@ from celery_progress.backend import ProgressRecorder
 import os
 from .ocr import get_text
 import requests
-from urllib.request import urlopen
+from urllib.request import urlopen, urlretrieve
 from urllib.error import URLError
 
 rest_api_address = os.environ.get('REST_API_ADDRESS')
@@ -110,7 +110,9 @@ def save_photo(self, hashtags, photo_id):
             files = {'file': open(url, 'rb')}
         else:
             url = new_photo.image.url
-            files = {'file': open(urlopen(url), 'rb')}
+            filename = './' + url.split("/")[-1]
+            urlretrieve(url, filename)
+            files = {'file': open(filename, 'rb')}
         hashtags = requests.post(rest_api_address + '/1', files=files)
         caption = requests.post(rest_api_address + '/2', files=files)
         new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
