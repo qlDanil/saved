@@ -113,9 +113,10 @@ def save_photo(self, hashtags, photo_id):
             filename = './' + url.split("/")[-1]
             urlretrieve(url, filename)
             files = {'file': open(filename, 'rb')}
-        hashtags = requests.post(rest_api_address + '/1', files=files)
-        caption = requests.post(rest_api_address + '/2', files=files)
-        new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
+        response_1 = requests.post(rest_api_address + '/1', files=files)
+        hashtags = response_1.text.replace('\"', '').split(' ')
+        response_2 = requests.post(rest_api_address + '/2', files=files)
+        new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(response_2.text))
 
         progress_recorder.set_progress(75, 100)
         for hashtag in hashtags:
