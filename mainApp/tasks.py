@@ -10,6 +10,7 @@ from .ocr import get_text
 import requests
 from urllib.request import urlopen
 from urllib.error import URLError
+from PIL import Image
 
 rest_api_address = os.environ.get('REST_API_ADDRESS')
 
@@ -106,7 +107,8 @@ def save_photo(self, hashtags, photo_id):
 
     if is_rest_api_work:
         url = new_photo.image.url
-        files = {'file': open(url, 'rb')}
+        im = Image.open(requests.get(url, stream=True).raw)
+        files = {'file': open(im, 'rb')}
         hashtags = requests.post(rest_api_address + '/1', files=files)
         caption = requests.post(rest_api_address + '/2', files=files)
         new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
