@@ -10,10 +10,9 @@ from .ocr import get_text
 import requests
 from urllib.request import urlopen
 from urllib.error import URLError
-from PIL import Image
 
 rest_api_address = os.environ.get('REST_API_ADDRESS')
-
+DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 def is_rest_api_work():
     try:
@@ -106,9 +105,12 @@ def save_photo(self, hashtags, photo_id):
     progress_recorder.set_progress(25, 100)
 
     if is_rest_api_work:
-        url = new_photo.image.url
-        im = Image.open(requests.get(url, stream=True).raw)
-        files = {'file': open(im, 'rb')}
+        if DEBUG:
+            url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+            files = {'file': open(url, 'rb')}
+        else:
+            url = new_photo.image.url
+            files = {'file': open(urlopen(url), 'rb')}
         hashtags = requests.post(rest_api_address + '/1', files=files)
         caption = requests.post(rest_api_address + '/2', files=files)
         new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
