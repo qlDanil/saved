@@ -105,7 +105,7 @@ def save_photo(self, hashtags, photo_id):
     progress_recorder.set_progress(25, 100)
 
     if is_rest_api_work:
-        url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+        url = new_photo.image.url
         files = {'file': open(url, 'rb')}
         hashtags = requests.post(rest_api_address + '/1', files=files)
         caption = requests.post(rest_api_address + '/2', files=files)
