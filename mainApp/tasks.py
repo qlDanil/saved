@@ -9,16 +9,16 @@ import os
 from .ocr import get_text
 import requests
 from urllib.request import urlopen, urlretrieve
-from urllib.error import URLError
 
 rest_api_address = os.environ.get('REST_API_ADDRESS')
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
+
 def is_rest_api_work():
     try:
-        urlopen(rest_api_address, timeout=20)
+        urlopen(rest_api_address, timeout=0.5)
         return True
-    except URLError as err:
+    except:
         return False
 
 
@@ -71,12 +71,20 @@ def upload(self, vk_token, owner_id, user_id):
                 new_photo.image.url)
             new_photo.save()
 
-            if is_rest_api_work:
-                url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
-                files = {'file': open(url, 'rb')}
-                hashtags = requests.post(rest_api_address + '/1', files=files)
-                caption = requests.post(rest_api_address + '/2', files=files)
-                new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(caption))
+            if is_rest_api_work():
+                if DEBUG:
+                    url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
+                    files = {'file': open(url, 'rb')}
+                else:
+                    url = new_photo.image.url
+                    filename = './' + url.split("/")[-1]
+                    urlretrieve(url, filename)
+                    files = {'file': open(filename, 'rb')}
+                response_1 = requests.post(rest_api_address + '/1', files=files)
+                hashtags = response_1.text.replace('\"', '').split(' ')
+                response_2 = requests.post(rest_api_address + '/2', files=files)
+                new_photo.description = new_photo.description + " || Image captioning: " + " ".join(
+                    str(response_2.text))
 
                 for hashtag in hashtags:
                     if not Hashtag.objects.filter(tag=hashtag).exists():
@@ -104,7 +112,7 @@ def save_photo(self, hashtags, photo_id):
     new_photo.save()
     progress_recorder.set_progress(25, 100)
 
-    if is_rest_api_work:
+    if is_rest_api_work():
         if DEBUG:
             url = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + new_photo.image.url
             files = {'file': open(url, 'rb')}
@@ -125,8 +133,6 @@ def save_photo(self, hashtags, photo_id):
                 new_hashtag.save()
             hashtag_object = Hashtag.objects.get(tag=hashtag)
             new_photo.hashtags.add(hashtag_object)
-    else:
-        new_photo.description = new_photo.description + " НЕТ СОЕДИНЕНИЯ"
     new_photo.available = True
     new_photo.save()
     progress_recorder.set_progress(100, 100)
