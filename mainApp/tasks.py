@@ -18,7 +18,8 @@ def is_rest_api_work():
     try:
         urlopen(rest_api_address, timeout=0.5)
         return True
-    except:
+    except Exception as exp:
+        print(exp)
         return False
 
 
@@ -80,11 +81,10 @@ def upload(self, vk_token, owner_id, user_id):
                     filename = './' + url.split("/")[-1]
                     urlretrieve(url, filename)
                     files = {'file': open(filename, 'rb')}
-                response_1 = requests.post(rest_api_address + '/1', files=files)
-                hashtags = response_1.text.replace('\"', '').split(' ')
-                response_2 = requests.post(rest_api_address + '/2', files=files)
-                new_photo.description = new_photo.description + " || Image captioning: " + " ".join(
-                    str(response_2.text))
+                response = requests.post(rest_api_address + '/1', files=files)
+                result = response.text.split('.')
+                hashtags = result[0].replace('\"', '').split(' ')
+                new_photo.description = new_photo.description + " || Image captioning: " + result[1]
 
                 for hashtag in hashtags:
                     if not Hashtag.objects.filter(tag=hashtag).exists():
@@ -121,10 +121,10 @@ def save_photo(self, hashtags, photo_id):
             filename = './' + url.split("/")[-1]
             urlretrieve(url, filename)
             files = {'file': open(filename, 'rb')}
-        response_1 = requests.post(rest_api_address + '/1', files=files)
-        hashtags = response_1.text.replace('\"', '').split(' ')
-        response_2 = requests.post(rest_api_address + '/2', files=files)
-        new_photo.description = new_photo.description + " || Image captioning: " + " ".join(str(response_2.text))
+        response = requests.post(rest_api_address + '/1', files=files)
+        result = response.text.split('.')
+        hashtags = result[0].replace('\"', '').split(' ')
+        new_photo.description = new_photo.description + " || Image captioning: " + result[1]
 
         progress_recorder.set_progress(75, 100)
         for hashtag in hashtags:
