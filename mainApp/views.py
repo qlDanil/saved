@@ -31,6 +31,8 @@ def main_window(request):
         for word in words:
             root_of_words.append(ps.stem(word))
         queries = [Q(description__icontains=root) for root in root_of_words]
+        queries_2 = [Q(hashtags__tag=root) for root in root_of_words]
+        queries.extend(queries_2)
         query = queries.pop()
         for item in queries:
             query |= item

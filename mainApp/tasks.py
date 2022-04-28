@@ -83,10 +83,10 @@ def upload(self, vk_token, owner_id, user_id):
                     files = {'file': open(filename, 'rb')}
                 response = requests.post(rest_api_address + '/1', files=files)
                 result = response.text.split('.')
-                hashtags = result[0].replace('\"', '').split(' ')
+                yolo_objects = result[0].replace('\"', '').split(' ')
                 new_photo.description = new_photo.description + " || Image captioning: " + result[1]
 
-                for hashtag in hashtags:
+                for hashtag in yolo_objects:
                     if not Hashtag.objects.filter(tag=hashtag).exists():
                         new_hashtag = Hashtag.objects.create(tag=hashtag)
                         new_hashtag.save()
@@ -123,16 +123,17 @@ def save_photo(self, hashtags, photo_id):
             files = {'file': open(filename, 'rb')}
         response = requests.post(rest_api_address + '/1', files=files)
         result = response.text.split('.')
-        hashtags = result[0].replace('\"', '').split(' ')
+        yolo_objects = result[0].replace('\"', '').split(' ')
+        hashtags.extend(yolo_objects)
         new_photo.description = new_photo.description + " || Image captioning: " + result[1]
 
-        progress_recorder.set_progress(75, 100)
-        for hashtag in hashtags:
-            if not Hashtag.objects.filter(tag=hashtag).exists():
-                new_hashtag = Hashtag.objects.create(tag=hashtag)
-                new_hashtag.save()
-            hashtag_object = Hashtag.objects.get(tag=hashtag)
-            new_photo.hashtags.add(hashtag_object)
+    progress_recorder.set_progress(75, 100)
+    for hashtag in hashtags:
+        if not Hashtag.objects.filter(tag=hashtag).exists():
+            new_hashtag = Hashtag.objects.create(tag=hashtag)
+            new_hashtag.save()
+        hashtag_object = Hashtag.objects.get(tag=hashtag)
+        new_photo.hashtags.add(hashtag_object)
     new_photo.available = True
     new_photo.save()
     progress_recorder.set_progress(100, 100)
