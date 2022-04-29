@@ -37,6 +37,7 @@ def main_window(request):
         for item in queries:
             query |= item
         photos = photos.filter(query)
+    photos = photos.distinct()
     if not hashtags == 'all':
         hashtags = set(hashtags.split(' '))
         for hashtag in hashtags:
