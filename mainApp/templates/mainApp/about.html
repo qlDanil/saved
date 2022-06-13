@@ -10,36 +10,26 @@
 {% block content %}
     <div class="team">
         <div class="container">
-            <pre class="s">
-            🔮Our team was brought together by the Siberian Federal University.
-            🔮"Saved" is a course project.
-            🔮The idea of the work was provided by the teacher P.V. Peresunko.
-            🔮We are all classmates and are studying in the 4th year of the specialty "Software Engineering".
-            </pre>
-            <hr align="center" size=3px color=#682a68>
-            <h1 class="text-center">"Our Team"</h1>
-            <hr align="center" size=3px color=#682a68>
             <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-12 item">
-                    <img src="{% static 'images/dz.png' %}" class="img-fluid" alt="team">
-                    <div class="des">
-                        Danil
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <div class="text">
+                        <p align="justify">
+                            The developed software product solves the problem of searching for a specific image in a
+                            personalized user database. The project is a web service where you can add a title,
+                            description and hashtags to each of the images. Search and sort by given properties. Among
+                            other things, "Saved" automatically completes the description with recognizable text and
+                            generates a signature describing the processes from the image. Also, hashtags are
+                            automatically added, meaning objects recognized in the image.
+                        </p>
+                        <p align="justify">
+                            A personalized image database is created by importing files from the user's device, as well
+                            as a special function of the web service - importing images from the "Saved Photos" album on
+                            the VK social network.
+                        </p>
                     </div>
-                    <span class="text-muted">Creator, Lord</span>
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 item">
-                    <img src="{% static 'images/ak.png' %}" class="img-fluid" alt="team">
-                    <div class="des">
-                        Arina
-                    </div>
-                    <span class="text-muted">Mastermind, Idol</span>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-12 item">
-                    <img src="{% static 'images/dp.png' %}" class="img-fluid" alt="team">
-                    <div class="des">
-                        Danil
-                    </div>
-                    <span class="text-muted">Creative Manager, Power</span>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <img src="{% static 'images/we.png' %}" class="img-fluid" alt="team">
                 </div>
             </div>
         </div>

@@ -1,28 +1,29 @@
 .a1 {
+    white-space: nowrap;
+    overflow: hidden;
     text-decoration: none;
     outline: none;
     display: inline-block;
     width: 120px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 35px;
-    margin: 10px 20px;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 10px;
+    height: 45px;
+    line-height: 45px;
+    border-radius: 10px;
+    border-color: #2c2525;
+    border-style: solid;
+    border-width: thin;
+    margin: 5px 10px;
     text-transform: uppercase;
     text-align: center;
-    letter-spacing: 2px;
     font-weight: 500;
-    color: #524f4e;
-    background: white;
+    color: #2c2525;
+    background: #ded8c5;
     box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
     transition: .3s;
 }
 
 .a1:hover, .a1.active {
-    background: #2EE59D;
-    box-shadow: 0 15px 20px rgba(46, 229, 157, .4);
-    color: white;
+    background: #2c2525;
+    color: #ded8c5;
     transform: translateY(-2px);
 }
 
@@ -159,7 +160,6 @@ a:hover {
     border: 0;
     display: block;
     font-size: 18px;
-    font-family: 'Poppins', sans-serif;
     cursor: pointer;
 }
 
@@ -178,7 +178,12 @@ a:hover {
 }
 
 .input-field input::-webkit-input-placeholder {
-    color: #ccc;
+    color: #827979;
+    background: #ded8c5;
+    border-radius: 10px;
+    border-color: #2c2525;
+    border-style: solid;
+    border-width: thin;
     font-size: 18px;
     font-weight: 300;
     opacity: 1;
@@ -190,14 +195,17 @@ a:hover {
 }
 
 .input-field .search-button {
-    background-color: rgba(200,200,200,0.2);
-    border: none;
-    border-radius: 20px;
+    color: #ded8c5;
+    background: #827979;
+    border-radius: 10px;
+    border-color: #2c2525;
+    border-style: solid;
+    border-width: thin;
 }
 
 .input-field .search-button:hover, .input-field .search-button:focus {
     box-shadow: none;
-    background-color: rgba(200,200,200,0.5);
+    background: #2c2525;
     outline: 0;
 }
 

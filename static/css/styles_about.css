@@ -1,35 +1,22 @@
 .team {
-    margin: 6em;
-    margin-top: 10em;
+    /*margin: 40px;*/
+    margin-top: 130px;
+    margin-bottom: 130px;
     position: relative;
 }
 
-.team h1 {
-    margin: 1em;
-    color: #682a68;
+.team .text {
+    /*margin: 1em;*/
+    width: 450px;
+    color: #2C2525;
     font-weight: bold;
-    font-size: 30px;
-    font-family: 'Philosopher', sans-serif;
-}
-
-.team .item {
-    position: relative;
+    font-size: 14pt;
+    font-family: 'Roboto', sans-serif;
 }
 
 .team .img-fluid {
+    margin-left: 100px;
     width: 300px;
+    height: 400px;
 }
 
-.team .des {
-    color: #682a68;
-    text-align: center;
-    font-family: 'Philosopher', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.team .s {
-    font-size: 20px;
-    font-family: 'Philosopher', sans-serif;
-    color: #682a68;
-}

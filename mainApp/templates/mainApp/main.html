@@ -11,15 +11,15 @@
 
 {% block content %}
     <div class="site-wrap">
-        <div class="row">
+        <div class="row ml-1">
             <a id="hashtag-all" class="a1 active" href="/">All</a>
             {% for hashtag in hashtags %}
                 <a id={{ hashtag.tag }} class="a1"
                    href="?hashtag={{ current_hashtags|urlencode }}{{ hashtag.tag|urlencode }}">#{{ hashtag.tag }}</a>
             {% endfor %}
             <div class="input-field ml-5" id="search-group">
-                <input class="input" id="search-input" type="text" placeholder="Поиск"/>
-                <button class="search-button" id="search-button">Найти</button>
+                <input class="input" id="search-input" type="text" placeholder="description"/>
+                <button class="search-button" id="search-button">search</button>
             </div>
         </div>
         <hr align="center" size=3px color=#000000>
