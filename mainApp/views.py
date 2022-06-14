@@ -52,7 +52,7 @@ def main_window(request):
                 if Hashtag.objects.filter(tag=hashtag).exists():
                     random_hashtags.append(Hashtag.objects.get(tag=hashtag))
                     counter += 1
-        while counter < min(hashtag_count, 10):
+        while counter < min(hashtag_count, 9):
             random = Hashtag.objects.random()
             if random not in random_hashtags:
                 random_hashtags.append(random)
