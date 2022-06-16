@@ -12,45 +12,49 @@
 
 {% block content %}
     <div class="page-content">
-        <div class="form-v7-content">
-            <div class="form-left">
-                <img src="{% static 'images/pin-up-girl.jpg' %}" alt="form">
-                <p class="text-1">Registration</p>
-                <p class="text-2">Privacy policy & Terms of service</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 d-none d-lg-block">
+                    <img src="{% static 'images/pictures.png' %}" class="img-fluid" id="img_reg" alt="saved images">
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="form-v7-content">
+                        <form class="form-detail" action="{% url 'signup' %}" method="post">
+                            {% csrf_token %}
+                            <h1 class="title" align="center">Sign up</h1>
+                            <div class="entry_fields">
+                                <label for="first_name">NAME</label>
+                                <input type="text" name="first_name" id="first_name" class="input-text form-control">
+                                <label for="username">LOGIN</label>
+                                <input type="text" name="username" id="username" class="input-text form-control"
+                                       required>
+                                <label for="your_email">E-MAIL</label>
+                                <input type="email" name="email" id="email" class="input-text form-control" required>
+                                <label for="password">PASSWORD</label>
+                                <input type="password" name="password1" id="pwd1" class="input-text form-control"
+                                       required>
+                                <label for="password">CONFIRM PASSWORD</label>
+                                <input type="password" name="password2" id="pwd2" class="input-text form-control"
+                                       required>
+                            </div>
+                            <input type="submit" name="login" class="register" value="sign up">
+                            <div class="addpos">
+                                <p align="center">OR</p>
+                                <p align="center"><a href="{% url 'login' %}?next={% url 'main_window' %}"><i
+                                        class="fas fa-sign-in-alt" data-toggle="tooltip"></i> LOG IN</a></p>
+                                <p align="center"><a href="{% url "social:begin" "vk-oauth2" %}"><i class="fab fa-vk"
+                                                                                                    data-toggle="tooltip"></i>
+                                    SIGN UP WITH VK.COM</a></p>
+                                <p align="center"><a href="{% url "social:begin" "google-oauth2" %}"><i
+                                        class="fab fa-google" data-toggle="tooltip"></i> SIGN UP WITH GOOGLE.COM</a></p>
+                                <p align="center"><a href="{% url "social:begin" "facebook" %}"><i
+                                        class="fab fa-facebook" data-toggle="tooltip"></i> SIGN UP WITH FACEBOOK.COM</a>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-            <form class="form-detail" action="{% url 'signup' %}" method="post">
-                {% csrf_token %}
-                <div class="form-row">
-                    <label for="first_name">Name</label>
-                    <input type="text" name="first_name" id="first_name" class="input-text form-control">
-                </div>
-                <div class="form-row">
-                    <label for="username">Login</label>
-                    <input type="text" name="username" id="username" class="input-text form-control" required>
-                </div>
-                <div class="form-row">
-                    <label for="your_email">E-mail</label>
-                    <input type="email" name="email" id="email" class="input-text form-control" required>
-                </div>
-                <div class="form-row">
-                    <label for="password">Password</label>
-                    <input type="password" name="password1" id="pwd1" class="input-text form-control" required>
-                </div>
-                <div class="form-row">
-                    <label for="confirm_password">Confirm password</label>
-                    <input type="password" name="password2" id="pwd2" class="input-text form-control" required>
-                </div>
-                <div class="form-row-last">
-                    <input type="submit" name="register" class="register" value="Sign up">
-                    <p>Or<a href="{% url 'login' %}">Log in</a></p>
-                    <p><a class="btn btn-primary text-white mt-sm-1" href="{% url "social:begin" "vk-oauth2" %}"
-                       role="button">Sign up with <i class="fab fa-vk" data-toggle="tooltip"></i></a>
-                    <a class="btn btn-success text-white mt-sm-1" href="{% url "social:begin" "google-oauth2" %}"
-                       role="button">Sign up with <i class="fab fa-google" data-toggle="tooltip"></i></a>
-                    <a class="btn btn-primary text-white mt-sm-1" href="{% url "social:begin" "facebook" %}"
-                       role="button">Sign up with <i class="fab fa-facebook" data-toggle="tooltip"></i></a></p>
-                </div>
-            </form>
             <div aria-live="polite" aria-atomic="true">
                 <div class="alerts">
                     {% for field in form %}

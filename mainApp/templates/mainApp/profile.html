@@ -9,10 +9,18 @@
 
 {% block content %}
     <div class="container-fluid" style="padding-top: 20vh;">
-        <div class="container">
-            <a class="btn btn-primary text-white mt-sm-1" href="{% url 'photo_import' %}"
-               role="button">Import saved photos from <i class="fab fa-vk" data-toggle="tooltip"></i></a>
+        <div class="h2 text-uppercase username">
+            {{ user.get_username }}
         </div>
+        <div>
+            To successfully import all images from the "Saved Photos" VK album, your account muust be
+            linked to the VK page (log in/sign up through VK).
+        </div>
+        <div>
+            There must be at least 1 image in the "Saved Photos" VK album.
+        </div>
+        <a class="btn vk_import mt-sm-1" href="{% url 'photo_import' %}"
+           role="button">import <i class="fab fa-vk" data-toggle="tooltip"></i></a>
     </div>
     <script src="{% static 'vendor/jquery/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'celery_progress/celery_progress.js' %}"></script>
