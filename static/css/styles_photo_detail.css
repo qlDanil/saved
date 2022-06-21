@@ -6,7 +6,7 @@
 
 .pic .img-fluid {
     max-width: 100%;
-    border-right: 4px solid #682a68;
+    border-right: 4px solid #ded8c5;
     border-radius: 4px;
     padding: 1em;
 }
@@ -17,23 +17,33 @@
 }
 
 .pic .meadow > .btn {
-    background: #682a68;
-    border-radius: 4px;
-    font-size: 20px;
-    color: white;
-    bottom: 0;
-    border: none;
-    cursor: pointer;
-    color: #fff;
-    font-weight: 700;
-    font-size: 15px;
-    float: left;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    border-color: #2c2525;
+    border-style: solid;
+    border-width: thin;
+    margin: 5px 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #2c2525;
+    background: #ded8c5;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+    font: 15pt 'Russo One';
 }
 
 .pic .meadow > .btn:hover {
-    background: #680268;
+    background: #2c2525;
+    color: #ded8c5;
+    transform: translateY(-2px);
 }
-
 .pic .discr {
     color: #000;
     font-weight: 500;

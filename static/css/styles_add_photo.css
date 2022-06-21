@@ -6,21 +6,39 @@
 .addpic .right {
     max-width: 500px;
 }
-
 .addpic .right .btn {
-    background: #682a68;
-    font-size: 20px;
-    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-decoration: none;
+    outline: none;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 10px;
+    border-color: #2c2525;
+    border-style: solid;
+    border-width: thin;
+    margin: 5px 10px;
+    text-align: center;
+    font-weight: bold;
+    color: #2c2525;
+    background: #ded8c5;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, .1);
+    transition: .3s;
+    font: 15pt 'Russo One';
 }
 
-.addpic .right .btn:hover, .addpic .right .btn:focus  {
-    background: #680268;
+.addpic .right .btn:hover, .addpic .right .btn:focus {
+    background: #2c2525;
+    color: #ded8c5;
+    transform: translateY(-2px);
 }
 
 .addpic .meadow {
     margin-left: 2em;
     padding: 1em;
-    border-left: 4px solid #682a68;
+    border-left: 4px solid #ded8c5;
     border-radius: 4px;
 }
 

@@ -111,7 +111,7 @@ class AddItemForm extends React.Component {
             }))), React.createElement("button", {
             type: "submit",
             className: "btn ml-1"
-        }, "Add"));
+        }, "add"));
     }
 
 }

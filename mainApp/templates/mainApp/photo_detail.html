@@ -29,9 +29,9 @@
                                 </div>
                         </div>
                         <p class="el discr">{{ photo.description }}</p>
-                        <a class="btn btn-primary el" href="{% url 'edit_photo' pk=photo.id %}">Edit</a>
+                        <a class="btn btn-primary el" href="{% url 'edit_photo' pk=photo.id %}">edit</a>
                         <button type="button" class="btn btn-primary el" data-toggle="modal"
-                                data-target="#deleteModal">Delete
+                                data-target="#deleteModal">delete
                         </button>
                         <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog"
                              aria-labelledby="deleteModalTitle" aria-hidden="true">
